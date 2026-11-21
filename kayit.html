@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN üyelik kayıt sayfası.">
+    <title>Kayıt Ol | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .register-page {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #f7f5ef;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 520px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(16, 44, 36, 0.09);
+        }
+
+        .register-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-heading h1 {
+            color: #183d32;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .register-heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .register-form .form-group {
+            margin-bottom: 18px;
+        }
+
+        .register-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #183d32;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .register-form input:focus {
+            border-color: #183d32;
+        }
+
+        .name-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 22px 0;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .terms input {
+            width: auto;
+            margin-top: 4px;
+            accent-color: #183d32;
+        }
+
+        .terms a {
+            color: #183d32;
+            font-weight: 600;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            background: #183d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .register-button:hover {
+            background: #102c24;
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 24px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #183d32;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-back {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .register-back:hover {
+            color: #183d32;
+        }
+
+        @media (max-width: 500px) {
+            .register-container {
+                padding: 28px 20px;
+            }
+
+            .name-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="giris.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main class="register-page">
+
+    <div class="register-container">
+
+        <div class="register-heading">
+            <h1>GEZGİN'e Katıl!</h1>
+            <p>Hesabını oluştur, yeni yolculuklara bizimle çık.</p>
+        </div>
+
+        <form class="register-form" id="register-form">
+
+            <div class="name-row">
+
+                <div class="form-group">
+                    <label for="first-name">Ad</label>
+                    <input type="text" id="first-name" name="firstName"
+                           placeholder="Adınız" autocomplete="given-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Soyad</label>
+                    <input type="text" id="last-name" name="lastName"
+                           placeholder="Soyadınız" autocomplete="family-name" required>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-posta Adresi</label>
+                <input type="email" id="email" name="email"
+                       placeholder="ornek@email.com" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefon Numarası</label>
+                <input type="tel" id="phone" name="phone"
+                       placeholder="05XX XXX XX XX" autocomplete="tel"
+                       pattern="05[0-9]{9}" title="05 ile başlayan 11 haneli numara girin."
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password"
+                       placeholder="En az 8 karakter" minlength="8"
+                       autocomplete="new-password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password-confirm">Şifre Tekrarı</label>
+                <input type="password" id="password-confirm" name="passwordConfirm"
+                       placeholder="Şifrenizi tekrar girin"
+                       minlength="8" autocomplete="new-password" required>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" id="terms" required>
+                <span>
+                    Üyelik koşullarını ve
+                    <a href="sss.html">bilgilendirme metnini</a>
+                    okudum ve kabul ediyorum.
+                </span>
+            </label>
+
+            <button type="submit" class="register-button">
+                Hesap Oluştur
+            </button>
+
+        </form>
+
+        <div class="login-text">
+            Zaten hesabın var mı?
+            <a href="giris.html">Giriş Yap</a>
+        </div>
+
+        <a href="index.html" class="register-back">
+            ← Ana Sayfaya Dön
+        </a>
+
+    </div>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Her yolculuk bir hikâyedir.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Hızlı Bağlantılar</h3>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="favoriler.html">♡ Favorilerim</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Yardım</h3>
+            <a href="iletisim.html">İletişim</a>
+            <a href="sss.html">Sıkça Sorulan Sorular</a>
+            <a href="sepet.html">Sepetim</a>
+            <a href="giris.html">Üye Girişi</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GEZGİN Outdoor. Her yolculuk bir hikâyedir.</p>
+    </div>
+
+</footer>
+
+<script>
+    document.getElementById("register-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const password = document.getElementById("password").value;
+        const passwordConfirm = document.getElementById("password-confirm").value;
+
+        if (password !== passwordConfirm) {
+            alert("Girdiğiniz şifreler birbiriyle eşleşmiyor.");
+            return;
+        }
+
+        alert("Kayıt formu hazır! Gerçek hesap oluşturma özelliğini güvenli üyelik sistemini kurduğumuzda aktif edeceğiz.");
+    });
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="GEZGİN mağazalarını keşfedin. Size en yakın mağazayı bulun ve yol tarifi alın.">
+
+    <title>Mağaza Bul | GEZGİN</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        .store-page {
+            background: #f7f5ef;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .store-hero {
+            background: linear-gradient(120deg, #102c24, #285343);
+            padding: 65px 7%;
+            color: white;
+            text-align: center;
+        }
+
+        .store-hero span {
+            color: #d8bd85;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .store-hero h1 {
+            color: white;
+            font-size: clamp(30px, 4vw, 45px);
+            margin: 18px 0;
+        }
+
+        .store-hero p {
+            color: #e6e9e4;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .store-search-section {
+            max-width: 1250px;
+            margin: -30px auto 35px;
+            padding: 0 25px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .store-search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 13px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .store-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .store-form-group label {
+            color: #183d32;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .store-form-group input,
+        .store-form-group select {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px;
+            border: 1px solid #deded8;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+            background: white;
+        }
+
+        .store-form-group input:focus,
+        .store-form-group select:focus {
+            border-color: #183d32;
+        }
+
+        .store-search-button {
+            height: 48px;
+            padding: 0 25px;
+            border: none;
+            border-radius: 6px;
+            background: #183d32;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .store-search-button:hover {
+            background: #c5a66b;
+            color: #183d32;
+        }
+
+        .location-button-area {
+            max-width: 1250px;
+            margin: 0 auto 35px;
+            padding: 0 25px;
+        }
+
+        .location-button {
+            border: 1px solid #c5a66b;
+            background: white;
+            color: #183d32;
+            padding: 13px 22px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .location-button:hover {
+            background: #183d32;
+            color: white;
+        }
+
+        .location-message {
+            display: block;
+            margin-top: 12px;
+            color: #555;
+            font-size: 13px;
+        }
+
+        .store-main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+        .store-heading {
+            margin-bottom: 25px;
+        }
+
+        .store-heading span {
+            color: #b18c4f;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .store-heading h2 {
+            color: #183d32;
+            font-size: 29px;
+            margin: 10px 0;
+        }
+
+        .store-heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .store-layout {
+            display: grid;
+            grid-template-columns: 390px 1fr;
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        .store-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 7px;
+        }
+
+        .store-card {
+            background: white;
+            border: 1px solid #e8e5dc;
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .store-card:hover {
+            border-color: #c5a66b;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.06);
+        }
+
+        .store-card.active {
+            border: 2px solid #183d32;
+        }
+
+        .store-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .store-card-top h3 {
+            color: #183d32;
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .store-badge {
+            background: #edf4ed;
+            color: #27834b;
+            padding: 6px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .store-card p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 7px 0;
+        }
+
+        .store-card .store-icon {
+            margin-right: 6px;
+        }
+
+        .store-card-buttons {
+            display: flex;
+            gap: 9px;
+            margin-top: 17px;
+        }
+
+        .store-detail-button,
+        .store-direction-button {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .store-detail-button {
+            background: #183d32;
+            color: white;
+            border: none;
+        }
+
+        .store-detail-button:hover {
+            background: #c5a66b;
+            color: #183d32;
+        }
+
+        .store-direction-button {
+            background: #f7f5ef;
+            color: #183d32;
+            border: 1px solid #dedbd1;
+        }
+
+        .store-direction-button:hover {
+            background: #c5a66b;
+        }
+
+        .store-map-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e8e5dc;
+            min-height: 550px;
+            position: relative;
+        }
+
+        #storeMap {
+            width: 100%;
+            height: 600px;
+            z-index: 1;
+        }
+
+        .map-label {
+            position: absolute;
+            z-index: 500;
+            top: 15px;
+            left: 15px;
+            background: white;
+            padding: 11px 16px;
+            border-radius: 6px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            color: #183d32;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .store-empty {
+            display: none;
+            background: white;
+            padding: 35px 20px;
+            text-align: center;
+            border-radius: 10px;
+            color: #777;
+        }
+
+        .store-empty h3 {
+            color: #183d32;
+            margin-bottom: 10px;
+        }
+
+        .store-info-section {
+            max-width: 1250px;
+            margin: 70px auto 0;
+            padding: 0 25px;
+        }
+
+        .store-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .store-info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 28px 22px;
+            text-align: center;
+            border: 1px solid #eeeae0;
+        }
+
+        .store-info-card .info-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .store-info-card h3 {
+            color: #183d32;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .store-info-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .store-project-note {
+            max-width: 1250px;
+            margin: 30px auto 0;
+            padding: 0 25px;
+            color: #888;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .store-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .store-list {
+                max-height: none;
+            }
+
+            .store-map-container {
+                min-height: 430px;
+            }
+
+            #storeMap {
+                height: 430px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .store-hero {
+                padding: 50px 20px;
+            }
+
+            .store-search-box {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .store-search-button {
+                width: 100%;
+            }
+
+            .store-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .store-card-buttons {
+                flex-direction: column;
+            }
+
+            .store-heading h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html" class="active">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="giris.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim
+            <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main class="store-page">
+
+    <section class="store-hero">
+
+        <span>GEZGİN MAĞAZALARI</span>
+
+        <h1>Sana En Yakın Mağazayı Keşfet.</h1>
+
+        <p>
+            GEZGİN dünyasını yakından tanı.
+            Mağazalarımızı keşfet, konumlarını incele
+            ve sana en uygun noktayı bul.
+        </p>
+
+    </section>
+
+    <section class="store-search-section">
+
+        <div class="store-search-box">
+
+            <div class="store-form-group">
+                <label for="store-city">Şehir Seç</label>
+
+                <select id="store-city">
+                    <option value="">Tüm Şehirler</option>
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Antalya">Antalya</option>
+                    <option value="Sivas">Sivas</option>
+                </select>
+            </div>
+
+            <div class="store-form-group">
+                <label for="store-search">Mağaza Ara</label>
+
+                <input
+                    type="text"
+                    id="store-search"
+                    placeholder="Mağaza veya şehir adı yazın..."
+                >
+            </div>
+
+            <button
+                type="button"
+                class="store-search-button"
+                onclick="filterStores()"
+            >
+                Mağazaları Bul
+            </button>
+
+        </div>
+
+    </section>
+
+    <div class="location-button-area">
+
+        <button
+            type="button"
+            class="location-button"
+            onclick="findNearestStore()"
+        >
+            📍 Konumumu Kullan
+        </button>
+
+        <span class="location-message" id="location-message">
+            Konum izni verirsen sana en yakın örnek mağazayı bulabiliriz.
+        </span>
+
+    </div>
+
+    <section class="store-main">
+
+        <div class="store-heading">
+            <span>GEZGİN NOKTALARI</span>
+            <h2>Mağazalarımız</h2>
+
+            <p id="store-result-count">
+                Mağazalar listeleniyor.
+            </p>
+        </div>
+
+        <div class="store-layout">
+
+            <div>
+
+                <div class="store-list" id="store-list"></div>
+
+                <div class="store-empty" id="store-empty">
+                    <h3>Mağaza Bulunamadı</h3>
+
+                    <p>
+                        Aramanıza uygun bir mağaza bulunamadı.
+                        Başka bir şehir deneyebilirsiniz.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="store-map-container">
+
+                <div class="map-label">
+                    📍 GEZGİN Mağaza Haritası
+                </div>
+
+                <div id="storeMap"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="store-info-section">
+
+        <div class="store-heading">
+            <span>GEZGİN DENEYİMİ</span>
+            <h2>Mağaza Bulmak Artık Daha Kolay</h2>
+
+            <p>
+                İhtiyacın olan mağazaya kolayca ulaş.
+            </p>
+        </div>
+
+        <div class="store-info-grid">
+
+            <div class="store-info-card">
+                <div class="info-icon">📍</div>
+                <h3>Kolay Konum Bulma</h3>
+
+                <p>
+                    Konumunu kullanarak sana en yakın
+                    örnek mağaza noktasını keşfet.
+                </p>
+            </div>
+
+            <div class="store-info-card">
+                <div class="info-icon">🗺️</div>
+                <h3>İnteraktif Harita</h3>
+
+                <p>
+                    Mağaza noktalarını harita üzerinden
+                    görüntüle ve konumlarını incele.
+                </p>
+            </div>
+
+            <div class="store-info-card">
+                <div class="info-icon">🚗</div>
+                <h3>Kolay Yol Tarifi</h3>
+
+                <p>
+                    Seçtiğin mağaza için harita üzerinden
+                    yol tarifi bağlantısına ulaş.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="store-project-note">
+        * Bu sayfadaki mağaza noktaları e-ticaret dersi kapsamında
+        hazırlanan örnek konumlardır. Gerçek GEZGİN mağazalarını veya
+        gerçek işletme adreslerini temsil etmez. Konum özelliğinin
+        çalışması için tarayıcınızın konum izni vermesi gerekir.
+    </div>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Keşfetmenin Keyfi, Yolculuğun Konforu.</p>
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Hızlı Bağlantılar</h3>
+
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="favoriler.html">Favorilerim</a>
+            <a href="sss.html">SSS</a>
+
+        </div>
+
+        <div class="footer-contact">
+            <h3>İletişim</h3>
+
+            <p>E-posta: info@gezgin.com</p>
+            <p>Web: GEZGİN Outdoor</p>
+
+            <a href="iletisim.html">Bize Ulaşın</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>© 2026 GEZGİN. Tüm hakları saklıdır.</p>
+
+        <p>
+            Bu web sitesi e-ticaret dersi kapsamında hazırlanmış
+            eğitim amaçlı bir projedir. Gerçek satış ve ödeme yapılmamaktadır.
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+    const gezginStores = [
+
+        {
+            id: 1,
+            name: "GEZGİN İstanbul Mağazası",
+            city: "İstanbul",
+            district: "Kadıköy",
+            address: "Kadıköy merkez, İstanbul (örnek konum)",
+            phone: "0212 000 00 01",
+            hours: "Hafta içi 09.00 - 20.00",
+            lat: 40.9903,
+            lng: 29.0290
+        },
+
+        {
+            id: 2,
+            name: "GEZGİN Ankara Mağazası",
+            city: "Ankara",
+            district: "Çankaya",
+            address: "Çankaya merkez, Ankara (örnek konum)",
+            phone: "0312 000 00 02",
+            hours: "Hafta içi 09.00 - 20.00",
+            lat: 39.9208,
+            lng: 32.8541
+        },
+
+        {
+            id: 3,
+            name: "GEZGİN İzmir Mağazası",
+            city: "İzmir",
+            district: "Konak",
+            address: "Konak merkez, İzmir (örnek konum)",
+            phone: "0232 000 00 03",
+            hours: "Hafta içi 09.00 - 20.00",
+            lat: 38.4189,
+            lng: 27.1287
+        },
+
+        {
+            id: 4,
+            name: "GEZGİN Antalya Mağazası",
+            city: "Antalya",
+            district: "Muratpaşa",
+            address: "Muratpaşa merkez, Antalya (örnek konum)",
+            phone: "0242 000 00 04",
+            hours: "Hafta içi 09.00 - 20.00",
+            lat: 36.8841,
+            lng: 30.7056
+        },
+
+        {
+            id: 5,
+            name: "GEZGİN Sivas Mağazası",
+            city: "Sivas",
+            district: "Merkez",
+            address: "Sivas merkez (örnek konum)",
+            phone: "0346 000 00 05",
+            hours: "Hafta içi 09.00 - 20.00",
+            lat: 39.7477,
+            lng: 37.0179
+        }
+
+    ];
+
+    const gezginMap = L.map("storeMap").setView([39.0, 35.0], 5);
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> katkıda bulunanlar'
+        }
+    ).addTo(gezginMap);
+
+    const storeMarkers = {};
+
+    gezginStores.forEach(store => {
+
+        const marker = L.marker([
+            store.lat,
+            store.lng
+        ]).addTo(gezginMap);
+
+        marker.bindPopup(`
+            <strong>${store.name}</strong><br>
+            ${store.district}, ${store.city}<br>
+            <small>Örnek proje konumu</small>
+        `);
+
+        storeMarkers[store.id] = marker;
+
+    });
+
+    function renderStores(storeArray) {
+
+        const storeList = document.getElementById("store-list");
+        const emptyMessage = document.getElementById("store-empty");
+        const resultCount = document.getElementById("store-result-count");
+
+        storeList.innerHTML = "";
+
+        resultCount.textContent =
+            storeArray.length + " mağaza noktası bulundu.";
+
+        if (storeArray.length === 0) {
+            emptyMessage.style.display = "block";
+            return;
+        }
+
+        emptyMessage.style.display = "none";
+
+        storeArray.forEach(store => {
+
+            const card = document.createElement("div");
+
+            card.className = "store-card";
+            card.id = "store-card-" + store.id;
+
+            card.innerHTML = `
+
+                <div class="store-card-top">
+
+                    <h3>${store.name}</h3>
+
+                    <span class="store-badge">
+                        Örnek Mağaza
+                    </span>
+
+                </div>
+
+                <p>
+                    <span class="store-icon">📍</span>
+                    ${store.district}, ${store.city}
+                </p>
+
+                <p>
+                    <span class="store-icon">🏢</span>
+                    ${store.address}
+                </p>
+
+                <p>
+                    <span class="store-icon">☎️</span>
+                    ${store.phone}
+                </p>
+
+                <p>
+                    <span class="store-icon">🕒</span>
+                    ${store.hours}
+                </p>
+
+                <div class="store-card-buttons">
+
+                    <button
+                        type="button"
+                        class="store-detail-button"
+                        onclick="showStoreOnMap(${store.id})"
+                    >
+                        Haritada Gör
+                    </button>
+
+                    <a
+                        class="store-direction-button"
+                        href="https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Yol Tarifi →
+                    </a>
+
+                </div>
+
+            `;
+
+            storeList.appendChild(card);
+
+        });
+
+    }
+
+    function showStoreOnMap(storeId) {
+
+        const store = gezginStores.find(
+            item => item.id === storeId
+        );
+
+        if (!store) return;
+
+        gezginMap.flyTo(
+            [store.lat, store.lng],
+            14,
+            {
+                duration: 1.2
+            }
+        );
+
+        storeMarkers[storeId].openPopup();
+
+        document.querySelectorAll(".store-card").forEach(card => {
+            card.classList.remove("active");
+        });
+
+        const selectedCard = document.getElementById(
+            "store-card-" + storeId
+        );
+
+        if (selectedCard) {
+            selectedCard.classList.add("active");
+        }
+
+    }
+
+    function filterStores() {
+
+        const selectedCity = document.getElementById(
+            "store-city"
+        ).value;
+
+        const searchText = document.getElementById(
+            "store-search"
+        ).value.toLocaleLowerCase("tr-TR").trim();
+
+        const filteredStores = gezginStores.filter(store => {
+
+            const cityMatch =
+                selectedCity === "" ||
+                store.city === selectedCity;
+
+            const searchableText = (
+
+                store.name + " " +
+                store.city + " " +
+                store.district + " " +
+                store.address
+
+            ).toLocaleLowerCase("tr-TR");
+
+            const searchMatch =
+                searchableText.includes(searchText);
+
+            return cityMatch && searchMatch;
+
+        });
+
+        renderStores(filteredStores);
+
+        if (filteredStores.length > 0) {
+
+            const bounds = filteredStores.map(store => [
+                store.lat,
+                store.lng
+            ]);
+
+            if (bounds.length === 1) {
+                gezginMap.flyTo(bounds[0], 13);
+            } else {
+                gezginMap.fitBounds(bounds, {
+                    padding: [45, 45]
+                });
+            }
+
+        }
+
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+
+        const earthRadius = 6371;
+
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+
+        const a =
+
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+
+            Math.cos(lat1 * Math.PI / 180) *
+
+            Math.cos(lat2 * Math.PI / 180) *
+
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+        const c = 2 * Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+        return earthRadius * c;
+
+    }
+
+    function findNearestStore() {
+
+        const message = document.getElementById(
+            "location-message"
+        );
+
+        if (!navigator.geolocation) {
+
+            message.textContent =
+                "Tarayıcınız konum özelliğini desteklemiyor.";
+
+            return;
+
+        }
+
+        message.textContent = "Konumunuz alınıyor...";
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+
+                const nearestStore = [...gezginStores].sort(
+
+                    (a, b) => {
+
+                        const distanceA = calculateDistance(
+                            userLat,
+                            userLng,
+                            a.lat,
+                            a.lng
+                        );
+
+                        const distanceB = calculateDistance(
+                            userLat,
+                            userLng,
+                            b.lat,
+                            b.lng
+                        );
+
+                        return distanceA - distanceB;
+
+                    }
+
+                )[0];
+
+                const distance = calculateDistance(
+                    userLat,
+                    userLng,
+                    nearestStore.lat,
+                    nearestStore.lng
+                );
+
+                message.textContent =
+                    "En yakın örnek mağaza: " +
+                    nearestStore.name +
+                    " | Yaklaşık " +
+                    distance.toFixed(1) +
+                    " km uzaklıkta.";
+
+                renderStores([nearestStore]);
+
+                const userMarker = L.marker([
+                    userLat,
+                    userLng
+                ]).addTo(gezginMap);
+
+                userMarker.bindPopup(
+                    "📍 Mevcut konumunuz"
+                ).openPopup();
+
+                const bounds = L.latLngBounds(
+                    [userLat, userLng],
+                    [nearestStore.lat, nearestStore.lng]
+                );
+
+                gezginMap.fitBounds(bounds, {
+                    padding: [60, 60]
+                });
+
+                showStoreOnMap(nearestStore.id);
+
+            },
+
+            function(error) {
+
+                if (error.code === 1) {
+
+                    message.textContent =
+                        "Konum izni verilmedi. Tarayıcı ayarlarından konum iznini açabilirsiniz.";
+
+                } else if (error.code === 2) {
+
+                    message.textContent =
+                        "Konum bilgisine ulaşılamadı. Lütfen tekrar deneyin.";
+
+                } else {
+
+                    message.textContent =
+                        "Konum isteği zaman aşımına uğradı. Tekrar deneyebilirsiniz.";
+
+                }
+
+            },
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 60000
+            }
+
+        );
+
+    }
+
+    renderStores(gezginStores);
+
+    document.getElementById("store-search").addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                filterStores();
+            }
+
+        }
+    );
+
+    document.getElementById("store-city").addEventListener(
+        "change",
+        filterStores
+    );
+
+</script>
+
+</body>
+</html>
