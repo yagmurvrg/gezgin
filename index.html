@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="GEZGİN seyahat ve outdoor ürünleri. Her yolculuk bir hikâyedir, biz o hikâyeye eşlik ediyoruz.">
+
+    <title>GEZGİN | Keşfetmenin Keyfi</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ========================================
+           GEZGİN SİNEMATİK VİDEO ALANI
+        ======================================== */
+
+        /* ========================================
+   GEZGİN PREMIUM VİDEO TASARIMI
+======================================== */
+
+/* ========================================
+   GEZGİN PREMIUM SİNEMATİK VİDEO
+======================================== */
+
+.gezgin-video-hero {
+    position: relative;
+    width: calc(100% - 80px);
+    max-width: 1200px;
+    height: 500px;
+    margin: 35px auto;
+    overflow: hidden;
+    background: #102c24;
+    border-radius: 14px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.gezgin-video-hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+.gezgin-video-sound {
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gezgin-video-sound:hover {
+    background: #c5a66b;
+    color: #183d32;
+    transform: scale(1.08);
+}
+
+/* GEZGİN VİDEO ALANI */
+
+.gezgin-video-hero {
+    position: relative;
+    width: calc(100% - 60px);
+    max-width: 1500px;
+    height: clamp(300px, 35vw, 460px);
+    margin: 30px auto 45px;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.gezgin-video-hero video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.gezgin-video-sound {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #183d32;
+    font-size: 19px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.gezgin-video-sound:hover {
+    transform: scale(1.08);
+    background: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .gezgin-video-hero {
+        width: calc(100% - 24px);
+        height: 260px;
+        margin: 20px auto 30px;
+        border-radius: 10px;
+    }
+
+    .gezgin-video-sound {
+        right: 12px;
+        bottom: 12px;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+.gezgin-video-sound {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gezgin-video-sound:hover {
+    background: #c5a66b;
+    color: #183d32;
+    transform: scale(1.08);
+}
+
+/* TELEFON UYUMLULUĞU */
+
+@media (max-width: 768px) {
+    .gezgin-video-hero {
+        width: 94%;
+        margin: 20px auto;
+        border-radius: 9px;
+    }
+
+    .gezgin-video-sound {
+        right: 10px;
+        bottom: 10px;
+        width: 36px;
+        height: 36px;
+    }
+}
+        /* VİDEO SES BUTONU */
+
+        .gezgin-video-sound {
+            position: absolute;
+            right: 30px;
+            bottom: 25px;
+            z-index: 2;
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 50%;
+            background: rgba(0,0,0,0.55);
+            color: white;
+            font-size: 19px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .gezgin-video-sound:hover {
+            background: #c5a66b;
+            color: #183d32;
+            transform: scale(1.08);
+        }
+
+        /* ========================================
+           ANA SAYFA ÜRÜN KARTLARI
+        ======================================== */
+
+        #featured-products-list {
+            position: relative;
+        }
+
+        #featured-products-list .product-card {
+            position: relative;
+        }
+
+        #featured-products-list .product-image-link {
+            display: block;
+            position: relative;
+        }
+
+        #featured-products-list .favorite-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 5;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            color: #183d32;
+            font-size: 23px;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            transition: 0.25s;
+        }
+
+        #featured-products-list .favorite-button:hover {
+            transform: scale(1.1);
+        }
+
+        #featured-products-list .favorite-button.active {
+            color: #c0392b;
+        }
+
+        #featured-products-list .home-stock-status {
+            display: block;
+            margin: 9px 0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        #featured-products-list .home-stock-available {
+            color: #27834b;
+        }
+
+        #featured-products-list .home-stock-low {
+            color: #d98218;
+        }
+
+        #featured-products-list .home-stock-out {
+            color: #c0392b;
+        }
+
+        #featured-products-list .home-restock-button {
+            display: block;
+            width: 100%;
+            padding: 9px 10px;
+            margin: 8px 0;
+            background: white;
+            color: #183d32;
+            border: 1px solid #c5a66b;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        #featured-products-list .home-restock-button:hover {
+            background: #f7f5ef;
+        }
+
+        #featured-products-list .home-discount-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 4;
+            background: #c5a66b;
+            color: #183d32;
+            padding: 7px 11px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+
+        #featured-products-list .home-old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 13px;
+            margin-right: 7px;
+            font-weight: 400;
+        }
+
+        #featured-products-list .home-current-price {
+            color: #183d32;
+            font-weight: 700;
+        }
+
+        #featured-products-list .home-product-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin-top: 12px;
+        }
+
+        #featured-products-list .home-product-actions a {
+            text-align: center;
+        }
+
+        /* ========================================
+           TELEFON UYUMLULUĞU
+        ======================================== */
+
+        @media (max-width: 768px) {
+    .gezgin-video-hero {
+        max-height: 300px;
+    }
+
+
+            .gezgin-video-hero video {
+                object-position: center;
+            }
+
+            .gezgin-video-sound {
+                right: 15px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html" class="active">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="hesabim.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim
+            <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main>
+
+    <!-- GEZGİN TANITIM VİDEOSU -->
+
+    <section class="gezgin-video-hero">
+
+        <video
+            id="gezginIntroVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-label="GEZGİN outdoor tanıtım videosu">
+
+            <source src="./video/gezgin-fragman.mp4" type="video/mp4">
+
+            Tarayıcınız video oynatmayı desteklemiyor.
+
+        </video>
+
+        <button
+            type="button"
+            class="gezgin-video-sound"
+            id="gezginSoundButton"
+            aria-label="Videonun sesini aç"
+            title="Sesi aç veya kapat">
+            🔇
+        </button>
+
+    </section>
+
+    <!-- KOLEKSİYONU KEŞFET -->
+
+    <div class="discover-products-wrapper">
+        <a href="urunler.html" class="discover-products-button">
+            Koleksiyonu Keşfet <span>→</span>
+        </a>
+    </div>
+
+    <!-- ÖNE ÇIKAN ÜRÜNLER -->
+
+    <section class="featured-section">
+
+        <div class="section-heading">
+            <span>GEZGİN KOLEKSİYONU</span>
+            <h2>Öne Çıkan Ürünler</h2>
+            <p>
+                Seyahat ve doğa deneyimin için özenle tasarlanan ürünler.
+            </p>
+        </div>
+
+        <div class="product-grid" id="featured-products-list"></div>
+
+        <div class="all-products">
+            <a href="urunler.html">Tüm 12 Ürünü Gör →</a>
+        </div>
+
+    </section>
+
+    <!-- HAKKIMIZDA -->
+
+
+    <!-- HAKKIMIZDA -->
+
+    <section class="about-section">
+
+        <div class="about-content">
+            <span>GEZGİN YAŞAM TARZI</span>
+
+            <h2>Her Yolculuk Yeni Bir Hikâyedir.</h2>
+
+            <p>
+                GEZGİN, seyahat ve outdoor yaşamını daha konforlu
+                hâle getirmek amacıyla tasarlanmış ürün koleksiyonunu
+                bir araya getirir.
+            </p>
+
+            <a href="hakkimizda.html" class="product-button">
+                Bizi Tanıyın
+            </a>
+        </div>
+
+    </section>
+
+
+    <!-- GEZGİN STANDARTLARI -->
+
+    <section class="featured-section">
+
+        <div class="section-heading">
+            <span>GEZGİN STANDARTLARI</span>
+            <h2>Her Detayda Konfor</h2>
+            <p>Seyahat deneyimini kolaylaştıran tasarım anlayışı.</p>
+        </div>
+
+        <div class="product-grid">
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>Kaliteli Tasarım</h3>
+                    <p>Kullanışlılık ve estetik bir arada.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>Konforlu Yolculuk</h3>
+                    <p>Yolculuklarını daha keyifli hâle getiren ürünler.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>Pratik Kullanım</h3>
+                    <p>Günlük yaşam ve seyahat için işlevsel tasarımlar.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-info">
+                    <h3>Outdoor Yaşam</h3>
+                    <p>Doğayı keşfetmek isteyenler için ürün seçenekleri.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ALT BİLGİ -->
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Keşfetmenin Keyfi, Yolculuğun Konforu.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Hızlı Bağlantılar</h3>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="favoriler.html">Favorilerim</a>
+            <a href="sss.html">SSS</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>İletişim</h3>
+            <p>E-posta: info@gezgin.com</p>
+            <p>Web: GEZGİN Outdoor</p>
+            <a href="iletisim.html">Bize Ulaşın</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GEZGİN. Tüm hakları saklıdır.</p>
+
+        <p>
+            Bu web sitesi e-ticaret dersi kapsamında hazırlanmış
+            eğitim amaçlı bir projedir. Gerçek satış ve ödeme yapılmamaktadır.
+        </p>
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<!-- GEZGİN VİDEO KONTROLLERİ -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const video = document.getElementById("gezginIntroVideo");
+        const soundButton = document.getElementById("gezginSoundButton");
+
+        if (!video) return;
+
+        // Video otomatik ve sessiz başlar.
+        video.muted = true;
+
+        function startVideo() {
+            video.play().catch(function () {
+                console.log("Video otomatik başlatılamadı.");
+            });
+        }
+
+        startVideo();
+
+        video.addEventListener("canplay", startVideo, { once: true });
+
+        // Ses açma ve kapatma.
+        if (soundButton) {
+
+            soundButton.addEventListener("click", function () {
+
+                video.muted = !video.muted;
+
+                soundButton.textContent = video.muted ? "🔇" : "🔊";
+
+                soundButton.setAttribute(
+                    "aria-label",
+                    video.muted
+                        ? "Videonun sesini aç"
+                        : "Videonun sesini kapat"
+                );
+
+                if (video.paused) {
+                    startVideo();
+                }
+
+            });
+
+        }
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN iletişim ve müşteri destek merkezi.">
+    <title>İletişim | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* DESTEK KARTLARI */
+
+        .support-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        .support-card {
+            background: #ffffff;
+            border: 1px solid #e8e5dc;
+            border-radius: 12px;
+            padding: 22px 18px;
+            transition: 0.3s ease;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.04);
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.09);
+            border-color: #c5a66b;
+        }
+
+        .support-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-icon {
+            background: #e8f6ed;
+        }
+
+        .email-icon {
+            background: #f5efe3;
+        }
+
+        .support-card h3 {
+            color: #183d32;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .support-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 17px;
+        }
+
+        .support-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 15px;
+            background: #183d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .support-button:hover {
+            background: #102c24;
+            transform: translateY(-2px);
+        }
+
+        .support-card small {
+            display: block;
+            margin-top: 11px;
+            color: #999;
+            font-size: 11px;
+        }
+
+        @media (max-width: 600px) {
+            .support-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html" class="active">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="giris.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim
+            <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+
+<section class="hero">
+    <div class="hero-content">
+
+        <span>GEZGİN İLETİŞİM MERKEZİ</span>
+
+        <h1>Bizimle İletişime Geçin.</h1>
+
+        <p>
+            Sorularınız, önerileriniz ve görüşleriniz bizim için değerli.
+            GEZGİN dünyası hakkında merak ettiklerinizi keşfedin.
+        </p>
+
+        <a href="#contact-content" class="primary-button">
+            İletişim Bilgileri
+        </a>
+
+    </div>
+</section>
+
+
+<main id="contact-content">
+
+    <section class="contact-section">
+
+        <div class="section-heading">
+            <span>BİZE ULAŞIN</span>
+            <h2>İletişim Bilgilerimiz</h2>
+            <p>
+                GEZGİN hakkında merak ettiklerinizi bizimle paylaşabilirsiniz.
+            </p>
+        </div>
+
+        <div class="contact-container">
+
+            <div class="contact-info">
+
+                <h2>Size Yardımcı Olmak İçin Buradayız.</h2>
+
+                <p>
+                    GEZGİN; seyahat, kamp ve outdoor ürünlerini
+                    bir araya getiren eğitim amaçlı bir e-ticaret
+                    projesidir.
+                </p>
+
+                <div class="contact-detail">
+                    <span>✉️</span>
+                    <div>
+                        <h3>E-posta</h3>
+                        <p>gezgin.outdoor1@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <span>🌐</span>
+                    <div>
+                        <h3>Markamız</h3>
+                        <p>GEZGİN Outdoor</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <span>🕒</span>
+                    <div>
+                        <h3>Çalışma Saatleri</h3>
+                        <p>Hafta içi: 09.00 – 18.00</p>
+                    </div>
+                </div>
+
+
+                <!-- WHATSAPP VE E-POSTA DESTEK -->
+
+                <div class="support-cards">
+
+                    <div class="support-card">
+
+                        <div class="support-icon whatsapp-icon">
+                            💬
+                        </div>
+
+                        <h3>WhatsApp Destek</h3>
+
+                        <p>
+                            Sorularınız için WhatsApp üzerinden
+                            bize kolayca ulaşabilirsiniz.
+                        </p>
+
+                        <a
+                            href="https://wa.me/90536840988?text=Merhaba%20GEZGİN%2C%20size%20bir%20konuda%20danışmak%20istiyorum."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="support-button"
+                        >
+                            Mesaj Gönder →
+                        </a>
+
+                        <small>WhatsApp üzerinden iletişim</small>
+
+                    </div>
+
+
+                    <div class="support-card">
+
+                        <div class="support-icon email-icon">
+                            ✉️
+                        </div>
+
+                        <h3>E-posta Destek</h3>
+
+                        <p>
+                            Detaylı sorularınız ve önerileriniz
+                            için bize e-posta gönderebilirsiniz.
+                        </p>
+
+                        <a
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=gezgin.outdoor1@gmail.com&su=GEZGİN%20Destek"
+target="_blank"
+rel="noopener noreferrer"
+                            class="support-button"
+                        >
+                            E-posta Gönder →
+                        </a>
+
+                        <small>gezgin.outdoor1@gmail.com</small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-highlight">
+                    <h3>GEZGİN Hakkında</h3>
+                    <p>
+                        Her yolculuk bir hikâyedir,
+                        biz o hikâyeye eşlik ediyoruz.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="contact-form">
+
+                <h2>Bize Mesaj Gönderin</h2>
+
+                <p class="contact-description">
+                    Görüşlerinizi ve sorularınızı aşağıdaki form aracılığıyla
+                    bizimle paylaşabilirsiniz.
+                </p>
+
+                <form id="contact-form">
+
+                    <label for="name">Adınız Soyadınız</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Adınızı ve soyadınızı giriniz"
+                        minlength="2"
+                        maxlength="60"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <label for="email">E-posta Adresiniz</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ornek@mail.com"
+                        maxlength="100"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <label for="subject">Mesaj Konusu</label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="Mesajınızın konusu"
+                        minlength="3"
+                        maxlength="100"
+                        required
+                    >
+
+                    <label for="message">Mesajınız</label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        minlength="10"
+                        maxlength="1000"
+                        placeholder="Mesajınızı buraya yazınız..."
+                        required
+                    ></textarea>
+
+                    <button type="submit" class="product-button">
+                        Mesajı Gönder
+                    </button>
+
+                    <div
+                        id="contact-success"
+                        class="contact-success"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+
+                </form>
+
+                <p class="form-note">
+                    Bu form eğitim amaçlıdır. Gerçek e-posta gönderimi
+                    veya veri kaydı yapılmamaktadır.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Her yolculuk bir hikâyedir, biz o hikâyeye eşlik ediyoruz.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Hızlı Bağlantılar</h3>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="iletisim.html">İletişim</a>
+            <a href="favoriler.html">♡ Favorilerim</a>
+            <a href="sss.html">SSS</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>İletişim</h3>
+            <p>E-posta: gezgin.outdoor1@gmail.com</p>
+            <p>GEZGİN Outdoor</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GEZGİN. Tüm hakları saklıdır.</p>
+
+        <p>
+            Eğitim amaçlı e-ticaret projesidir.
+            Gerçek satış ve ödeme yapılmamaktadır.
+        </p>
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    const successMessage = document.getElementById("contact-success");
+
+    if (!name || !email || !subject || !message) {
+        return;
+    }
+
+    if (name.length < 2 || subject.length < 3 || message.length < 10) {
+        return;
+    }
+
+    successMessage.textContent =
+        "✓ Teşekkür ederiz, " + name +
+        "! Mesajınız demo formunda başarıyla oluşturuldu.";
+
+    successMessage.hidden = false;
+
+    this.reset();
+
+});
+</script>
+
+</body>
+</html>

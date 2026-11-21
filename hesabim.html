@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN kullanıcı hesap ve müşteri yönetim paneli.">
+    <title>Hesabım | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .account-page {
+            background: #f7f5ef;
+            min-height: 80vh;
+            padding: 55px 20px;
+        }
+
+        .account-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .account-heading {
+            margin-bottom: 30px;
+        }
+
+        .account-heading span {
+            color: #c5a66b;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .account-heading h1 {
+            color: #183d32;
+            font-size: 34px;
+            margin: 8px 0;
+        }
+
+        .account-heading p {
+            color: #777;
+        }
+
+        .account-layout {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        .account-menu,
+        .account-content {
+            background: #fff;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(16,44,36,0.06);
+        }
+
+        .account-menu {
+            position: sticky;
+            top: 20px;
+        }
+
+        .account-menu h3 {
+            color: #183d32;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .account-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 12px;
+            margin-bottom: 5px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .account-menu a:hover,
+        .account-menu a.active {
+            background: #edf2ee;
+            color: #183d32;
+            font-weight: 700;
+        }
+
+        .logout-button {
+            display: block;
+            margin-top: 20px;
+            padding: 13px;
+            width: 100%;
+            background: #fff;
+            color: #a33;
+            border: 1px solid #e8caca;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .logout-button:hover {
+            background: #fff3f3;
+        }
+
+        .account-panel {
+            display: none;
+        }
+
+        .account-panel.active {
+            display: block;
+            animation: accountFade .25s ease;
+        }
+
+        @keyframes accountFade {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .account-content h2 {
+            color: #183d32;
+            margin-bottom: 10px;
+            font-size: 23px;
+        }
+
+        .account-content > p,
+        .account-panel > p {
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .welcome-box {
+            background: linear-gradient(120deg, #183d32, #102c24);
+            border-radius: 12px;
+            padding: 28px;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .welcome-box span {
+            color: #c5a66b;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .welcome-box h2 {
+            color: white;
+            font-size: 26px;
+            margin: 12px 0;
+        }
+
+        .welcome-box p {
+            color: #e3e9e5;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .account-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .account-card {
+            border: 1px solid #e8e8e8;
+            padding: 22px;
+            border-radius: 10px;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .account-card:hover {
+            border-color: #c5a66b;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,.05);
+        }
+
+        .account-card .icon {
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .account-card h3 {
+            color: #183d32;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .account-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .account-card button {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 0;
+            border: 0;
+            background: none;
+            color: #183d32;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .account-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #183d32;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #183d32;
+            box-shadow: 0 0 0 3px rgba(24,61,50,.07);
+        }
+
+        .account-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 22px;
+            background: #183d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            font-size: 13px;
+        }
+
+        .account-button:hover {
+            background: #102c24;
+            transform: translateY(-2px);
+        }
+
+        .account-button.gold {
+            background: #c5a66b;
+            color: #102c24;
+        }
+
+        .account-button.gold:hover {
+            background: #b59659;
+        }
+
+        .account-notice {
+            margin-top: 22px;
+            padding: 15px;
+            background: #f7f5ef;
+            border-radius: 8px;
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 45px 20px;
+            border: 1px dashed #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            color: #183d32;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .address-list {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .address-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 9px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .address-card h3 {
+            color: #183d32;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .address-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+
+        .delete-button {
+            background: #fff3f3;
+            border: 1px solid #efdada;
+            color: #a33;
+            padding: 9px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .delete-button:hover {
+            background: #fbe3e3;
+        }
+
+        .request-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 9px;
+            padding: 18px;
+            margin-top: 14px;
+        }
+
+        .request-card h3 {
+            color: #183d32;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .request-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .status-label {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #edf2ee;
+            color: #183d32;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .section-divider {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 25px 0;
+        }
+
+        .site-footer {
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 750px) {
+            .account-page {
+                padding: 35px 14px;
+            }
+
+            .account-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .account-menu {
+                position: static;
+            }
+
+            .account-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .account-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .account-heading h1 {
+                font-size: 27px;
+            }
+
+            .welcome-box h2 {
+                font-size: 22px;
+            }
+
+            .address-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-container">
+
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="GEZGİN Logo">
+        </a>
+
+        <nav class="main-nav">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="iletisim.html">İletişim</a>
+            <a href="sss.html">SSS</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="hesabim.html">Hesabım</a>
+            <a href="favoriler.html">♡ Favorilerim</a>
+            <a href="sepet.html">🛒 Sepetim</a>
+        </div>
+
+    </div>
+</header>
+
+
+<main class="account-page">
+
+    <div class="account-container">
+
+        <div class="account-heading">
+            <span>GEZGİN ÜYE MERKEZİ</span>
+            <h1>Hesabım</h1>
+            <p>Hesap bilgilerini ve alışveriş işlemlerini tek bir yerden yönet.</p>
+        </div>
+
+        <div class="account-layout">
+
+            <aside class="account-menu">
+
+                <h3>Hesap Menüsü</h3>
+
+                <a href="#genel" class="active" data-panel="genel">👤 Hesap Özeti</a>
+                <a href="#bilgiler" data-panel="bilgiler">📋 Kişisel Bilgilerim</a>
+                <a href="#siparisler" data-panel="siparisler">📦 Siparişlerim</a>
+                <a href="favoriler.html">❤️ Favorilerim</a>
+                <a href="#adresler" data-panel="adresler">📍 Adreslerim</a>
+                <a href="#iadeler" data-panel="iadeler">🔄 İade ve Değişim</a>
+                <a href="#sifre" data-panel="sifre">🔒 Şifre İşlemleri</a>
+
+                <button class="logout-button" id="logout-button">
+                    ↪ Çıkış Yap
+                </button>
+
+            </aside>
+
+
+            <section class="account-content">
+
+                <!-- HESAP ÖZETİ -->
+
+                <div class="account-panel active" id="panel-genel">
+
+                    <div class="welcome-box">
+                        <span>GEZGİN OUTDOOR</span>
+                        <h2>Hoş Geldin!</h2>
+                        <p>
+                            GEZGİN hesabına hoş geldin. Kişisel bilgilerini,
+                            adreslerini ve alışveriş işlemlerini buradan yönetebilirsin.
+                        </p>
+                    </div>
+
+                    <h2>Hesap İşlemlerin</h2>
+                    <p>İhtiyacın olan bölüme kolayca ulaşabilirsin.</p>
+
+                    <div class="account-cards">
+
+                        <div class="account-card" data-open="bilgiler">
+                            <div class="icon">👤</div>
+                            <h3>Kişisel Bilgilerim</h3>
+                            <p>Ad, soyad, e-posta ve telefon bilgilerini yönet.</p>
+                            <button type="button">Bilgilerimi Düzenle →</button>
+                        </div>
+
+                        <div class="account-card" data-open="siparisler">
+                            <div class="icon">📦</div>
+                            <h3>Siparişlerim</h3>
+                            <p>Sipariş geçmişini ve sipariş durumlarını görüntüle.</p>
+                            <button type="button">Siparişlerimi Gör →</button>
+                        </div>
+
+                        <div class="account-card" data-open="adresler">
+                            <div class="icon">📍</div>
+                            <h3>Adreslerim</h3>
+                            <p>Teslimat adreslerini ekle ve yönet.</p>
+                            <button type="button">Adreslerimi Yönet →</button>
+                        </div>
+
+                        <div class="account-card" data-open="iadeler">
+                            <div class="icon">🔄</div>
+                            <h3>İade ve Değişim</h3>
+                            <p>Ürünlerin için iade veya değişim talebi oluştur.</p>
+                            <button type="button">Talep Oluştur →</button>
+                        </div>
+
+                        <div class="account-card" data-open="sifre">
+                            <div class="icon">🔒</div>
+                            <h3>Şifre İşlemleri</h3>
+                            <p>Hesap güvenliği ve şifre işlemleri hakkında bilgi al.</p>
+                            <button type="button">İncele →</button>
+                        </div>
+
+                        <div class="account-card" onclick="window.location.href='favoriler.html'">
+                            <div class="icon">❤️</div>
+                            <h3>Favorilerim</h3>
+                            <p>Beğendiğin ürünlere göz at.</p>
+                            <button type="button">Favorilerimi Gör →</button>
+                        </div>
+
+                    </div>
+
+                    <div class="account-notice">
+                        Bu sayfa GEZGİN eğitim projesinin demo müşteri panelidir.
+                        Bilgiler ve talepler bu tarayıcıda yerel olarak saklanır.
+                        Gerçek sipariş ve ödeme işlemi yapılmamaktadır.
+                    </div>
+
+                </div>
+
+
+                <!-- KİŞİSEL BİLGİLER -->
+
+                <div class="account-panel" id="panel-bilgiler">
+
+                    <h2>Kişisel Bilgilerim</h2>
+                    <p>Hesap bilgilerini buradan düzenleyebilirsin.</p>
+
+                    <form id="profile-form" class="account-form">
+
+                        <div class="form-group">
+                            <label for="profile-name">Adın</label>
+                            <input type="text" id="profile-name" maxlength="50" placeholder="Adın">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile-surname">Soyadın</label>
+                            <input type="text" id="profile-surname" maxlength="50" placeholder="Soyadın">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile-email">E-posta Adresin</label>
+                            <input type="email" id="profile-email" maxlength="100" placeholder="ornek@mail.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile-phone">Telefon Numaran</label>
+                            <input type="tel" id="profile-phone" maxlength="20" placeholder="05XX XXX XX XX">
+                        </div>
+
+                        <div class="form-group full">
+                            <button type="submit" class="account-button">
+                                Bilgilerimi Kaydet
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="account-notice">
+                        Kaydettiğin bilgiler bu tarayıcıda saklanır.
+                        Gerçek üyelik sistemine bağlı değildir.
+                    </div>
+
+                </div>
+
+
+                <!-- SİPARİŞLER -->
+
+                <div class="account-panel" id="panel-siparisler">
+
+                    <h2>Siparişlerim</h2>
+                    <p>Alışveriş geçmişini ve sipariş durumlarını buradan takip edebilirsin.</p>
+
+                    <div class="empty-state">
+                        <div class="empty-icon">📦</div>
+                        <h3>Henüz siparişin bulunmuyor.</h3>
+                        <p>
+                            GEZGİN koleksiyonunu keşfetmeye başlayabilir,
+                            beğendiğin ürünleri sepetine ekleyebilirsin.
+                        </p>
+                        <a href="urunler.html" class="account-button">
+                            Ürünleri Keşfet →
+                        </a>
+                    </div>
+
+                    <div class="account-notice">
+                        Bu demo sürümünde gerçek sipariş oluşturulmamaktadır.
+                        Sipariş takibi özelliği gerçek bir sipariş altyapısı gerektirir.
+                    </div>
+
+                </div>
+
+
+                <!-- ADRESLER -->
+
+                <div class="account-panel" id="panel-adresler">
+
+                    <h2>Adreslerim</h2>
+                    <p>Teslimat adreslerini ekleyebilir ve kayıtlı adreslerini yönetebilirsin.</p>
+
+                    <form id="address-form" class="account-form">
+
+                        <div class="form-group">
+                            <label for="address-title">Adres Başlığı</label>
+                            <input type="text" id="address-title" maxlength="40" placeholder="Örn. Ev Adresim" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address-person">Ad Soyad</label>
+                            <input type="text" id="address-person" maxlength="80" placeholder="Adınız Soyadınız" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address-phone">Telefon</label>
+                            <input type="tel" id="address-phone" maxlength="20" placeholder="05XX XXX XX XX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address-city">Şehir</label>
+                            <input type="text" id="address-city" maxlength="40" placeholder="Şehir" required>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="address-detail">Açık Adres</label>
+                            <textarea id="address-detail" rows="4" maxlength="500" placeholder="Mahalle, cadde, sokak, bina ve daire numarası..." required></textarea>
+                        </div>
+
+                        <div class="form-group full">
+                            <button type="submit" class="account-button">
+                                + Adres Ekle
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <hr class="section-divider">
+
+                    <h2>Kayıtlı Adreslerim</h2>
+
+                    <div id="address-list" class="address-list"></div>
+
+                </div>
+
+
+                <!-- İADE VE DEĞİŞİM -->
+
+                <div class="account-panel" id="panel-iadeler">
+
+                    <h2>İade ve Değişim</h2>
+                    <p>Ürünlerin için iade veya değişim talebi oluşturabilirsin.</p>
+
+                    <form id="return-form" class="account-form">
+
+                        <div class="form-group">
+                            <label for="return-order">Sipariş Numarası</label>
+                            <input type="text" id="return-order" maxlength="40" placeholder="Örn. GZ-2026-001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="return-type">Talep Türü</label>
+                            <select id="return-type" required>
+                                <option value="">Seçiniz</option>
+                                <option value="İade">Ürün İadesi</option>
+                                <option value="Değişim">Ürün Değişimi</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="return-reason">Talep Açıklaması</label>
+                            <textarea id="return-reason" rows="5" maxlength="1000" placeholder="Talebinizin nedenini açıklayınız..." required></textarea>
+                        </div>
+
+                        <div class="form-group full">
+                            <button type="submit" class="account-button">
+                                Talep Oluştur
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <hr class="section-divider">
+
+                    <h2>Talep Geçmişim</h2>
+
+                    <div id="return-list"></div>
+
+                    <div class="account-notice">
+                        İade ve değişim talepleri demo amaçlıdır.
+                        Gerçek bir iade işlemi başlatılmaz veya mağazaya iletilmez.
+                    </div>
+
+                </div>
+
+
+                <!-- ŞİFRE İŞLEMLERİ -->
+
+                <div class="account-panel" id="panel-sifre">
+
+                    <h2>Şifre İşlemleri</h2>
+
+                    <div class="empty-state">
+                        <div class="empty-icon">🔐</div>
+                        <h3>Hesap Güvenliği</h3>
+                        <p>
+                            Şifre değiştirme ve şifre yenileme işlemleri
+                            gerçek üyelik altyapısı kurulduğunda aktif olacaktır.
+                        </p>
+                        <a href="giris.html" class="account-button">
+                            Giriş Sayfasına Git
+                        </a>
+                    </div>
+
+                    <div class="account-notice">
+                        Hesap güvenliği için şifreler bu demo panelinde saklanmaz.
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <p>© 2026 GEZGİN Outdoor. Her yolculuk bir hikâyedir.</p>
+
+    <div class="footer-links">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+        <a href="sepet.html">Sepetim</a>
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuLinks = document.querySelectorAll(".account-menu a[data-panel]");
+    const panels = document.querySelectorAll(".account-panel");
+
+    function showPanel(panelName) {
+
+        panels.forEach(panel => {
+            panel.classList.remove("active");
+        });
+
+        menuLinks.forEach(link => {
+            link.classList.remove("active");
+        });
+
+        const selectedPanel = document.getElementById("panel-" + panelName);
+        const selectedLink = document.querySelector('[data-panel="' + panelName + '"]');
+
+        if (selectedPanel) {
+            selectedPanel.classList.add("active");
+        }
+
+        if (selectedLink) {
+            selectedLink.classList.add("active");
+        }
+
+        if (panelName === "adresler") renderAddresses();
+        if (panelName === "iadeler") renderReturns();
+
+        if (window.innerWidth < 750 && selectedPanel) {
+            selectedPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+
+    menuLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            showPanel(this.dataset.panel);
+            history.replaceState(null, "", "#" + this.dataset.panel);
+        });
+    });
+
+    document.querySelectorAll("[data-open]").forEach(card => {
+        card.addEventListener("click", function () {
+            const panelName = this.dataset.open;
+            showPanel(panelName);
+            history.replaceState(null, "", "#" + panelName);
+        });
+    });
+
+    const initialPanel = location.hash.replace("#", "");
+    const validPanels = ["genel", "bilgiler", "siparisler", "adresler", "iadeler", "sifre"];
+
+    showPanel(validPanels.includes(initialPanel) ? initialPanel : "genel");
+
+
+    // KİŞİSEL BİLGİLER
+
+    const profileForm = document.getElementById("profile-form");
+    const profileKey = "gezginAccountProfile";
+
+    function loadProfile() {
+        try {
+            const profile = JSON.parse(localStorage.getItem(profileKey)) || {};
+
+            document.getElementById("profile-name").value = profile.name || "";
+            document.getElementById("profile-surname").value = profile.surname || "";
+            document.getElementById("profile-email").value = profile.email || "";
+            document.getElementById("profile-phone").value = profile.phone || "";
+        } catch (error) {
+            console.error("Profil bilgileri okunamadı.", error);
+        }
+    }
+
+    profileForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const profile = {
+            name: document.getElementById("profile-name").value.trim(),
+            surname: document.getElementById("profile-surname").value.trim(),
+            email: document.getElementById("profile-email").value.trim(),
+            phone: document.getElementById("profile-phone").value.trim()
+        };
+
+        try {
+            localStorage.setItem(profileKey, JSON.stringify(profile));
+            alert("Kişisel bilgileriniz başarıyla kaydedildi.");
+        } catch (error) {
+            alert("Bilgiler kaydedilemedi. Tarayıcı depolama alanını kontrol edin.");
+        }
+    });
+
+    loadProfile();
+
+
+    // ADRESLER
+
+    const addressKey = "gezginAccountAddresses";
+    const addressForm = document.getElementById("address-form");
+    const addressList = document.getElementById("address-list");
+
+    function getAddresses() {
+        try {
+            return JSON.parse(localStorage.getItem(addressKey)) || [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function renderAddresses() {
+        const addresses = getAddresses();
+
+        if (addresses.length === 0) {
+            addressList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📍</div>
+                    <h3>Henüz kayıtlı adresin yok.</h3>
+                    <p>Yukarıdaki formu kullanarak ilk adresini ekleyebilirsin.</p>
+                </div>
+            `;
+            return;
+        }
+
+        addressList.innerHTML = addresses.map((address, index) => `
+            <div class="address-card">
+                <div>
+                    <h3>📍 ${escapeHTML(address.title)}</h3>
+                    <p><strong>${escapeHTML(address.person)}</strong></p>
+                    <p>${escapeHTML(address.phone)}</p>
+                    <p>${escapeHTML(address.city)}</p>
+                    <p>${escapeHTML(address.detail)}</p>
+                </div>
+                <button type="button" class="delete-button" data-delete-address="${index}">
+                    Adresi Sil
+                </button>
+            </div>
+        `).join("");
+    }
+
+    addressForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const address = {
+            title: document.getElementById("address-title").value.trim(),
+            person: document.getElementById("address-person").value.trim(),
+            phone: document.getElementById("address-phone").value.trim(),
+            city: document.getElementById("address-city").value.trim(),
+            detail: document.getElementById("address-detail").value.trim()
+        };
+
+        const addresses = getAddresses();
+        addresses.push(address);
+
+        try {
+            localStorage.setItem(addressKey, JSON.stringify(addresses));
+            addressForm.reset();
+            renderAddresses();
+            alert("Adresiniz başarıyla kaydedildi.");
+        } catch (error) {
+            alert("Adres kaydedilemedi. Tarayıcı depolama alanını kontrol edin.");
+        }
+    });
+
+    addressList.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-delete-address]");
+
+        if (!button) return;
+
+        const index = Number(button.dataset.deleteAddress);
+
+        if (!confirm("Bu adresi silmek istediğinize emin misiniz?")) return;
+
+        const addresses = getAddresses();
+        addresses.splice(index, 1);
+
+        localStorage.setItem(addressKey, JSON.stringify(addresses));
+        renderAddresses();
+    });
+
+
+    // İADE VE DEĞİŞİM TALEPLERİ
+
+    const returnKey = "gezginReturnRequests";
+    const returnForm = document.getElementById("return-form");
+    const returnList = document.getElementById("return-list");
+
+    function getReturns() {
+        try {
+            return JSON.parse(localStorage.getItem(returnKey)) || [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function renderReturns() {
+        const requests = getReturns();
+
+        if (requests.length === 0) {
+            returnList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🔄</div>
+                    <h3>Henüz bir talebin bulunmuyor.</h3>
+                    <p>İade veya değişim taleplerin burada görüntülenecek.</p>
+                </div>
+            `;
+            return;
+        }
+
+        returnList.innerHTML = requests.map(request => `
+            <div class="request-card">
+                <h3>${escapeHTML(request.type)} Talebi</h3>
+                <p><strong>Sipariş No:</strong> ${escapeHTML(request.order)}</p>
+                <p><strong>Açıklama:</strong> ${escapeHTML(request.reason)}</p>
+                <p><strong>Tarih:</strong> ${escapeHTML(request.date)}</p>
+                <span class="status-label">Demo Talep Kaydı</span>
+            </div>
+        `).join("");
+    }
+
+    returnForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const request = {
+            order: document.getElementById("return-order").value.trim(),
+            type: document.getElementById("return-type").value,
+            reason: document.getElementById("return-reason").value.trim(),
+            date: new Date().toLocaleDateString("tr-TR")
+        };
+
+        const requests = getReturns();
+        requests.unshift(request);
+
+        try {
+            localStorage.setItem(returnKey, JSON.stringify(requests));
+            returnForm.reset();
+            renderReturns();
+            alert("Talebiniz demo paneline kaydedildi.");
+        } catch (error) {
+            alert("Talep kaydedilemedi. Tarayıcı depolama alanını kontrol edin.");
+        }
+    });
+
+
+    // GÜVENLİ METİN GÖSTERİMİ
+
+    function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, function (character) {
+            const replacements = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            };
+
+            return replacements[character];
+        });
+    }
+
+
+    // ÇIKIŞ
+
+    document.getElementById("logout-button").addEventListener("click", function () {
+
+        const confirmLogout = confirm("Hesabından çıkış yapmak istediğine emin misin?");
+
+        if (confirmLogout) {
+            window.location.href = "giris.html";
+        }
+
+    });
+
+});
+</script>
+
+</body>
+</html>
