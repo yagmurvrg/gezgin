@@ -1761,6 +1761,80 @@ function renderProductInformation(product) {
 // ÜRÜN DETAY SAYFASI
 // ==========================================
 
+function renderThumbnails(product, activeIndex = 0) {
+    let thumbnailArea = document.getElementById("detail-thumbnails");
+
+    if (!thumbnailArea) {
+        const zoomContainer = document.getElementById("zoom-container");
+        const mainImage = document.getElementById("detail-image");
+
+        if (zoomContainer) {
+            thumbnailArea = document.createElement("div");
+            thumbnailArea.id = "detail-thumbnails";
+            zoomContainer.insertAdjacentElement("afterend", thumbnailArea);
+        } else if (mainImage) {
+            thumbnailArea = document.createElement("div");
+            thumbnailArea.id = "detail-thumbnails";
+            mainImage.insertAdjacentElement("afterend", thumbnailArea);
+        } else {
+            return;
+        }
+    }
+
+    thumbnailArea.innerHTML = "";
+
+    if (!product.colors || product.colors.length <= 1) {
+        return;
+    }
+
+    product.colors.forEach((color, index) => {
+        const thumbnail = document.createElement("button");
+
+        thumbnail.type = "button";
+        thumbnail.className = "product-thumbnail";
+        thumbnail.style.cssText = `
+            width: 65px;
+            height: 65px;
+            padding: 4px;
+            margin: 5px;
+            border: 2px solid ${index === activeIndex ? "#c5a66b" : "#ddd"};
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        `;
+
+        thumbnail.setAttribute("aria-label", color.name);
+        thumbnail.setAttribute("aria-pressed", index === activeIndex ? "true" : "false");
+
+        thumbnail.innerHTML = `
+            <img
+                src="images/${escapeHTML(color.image)}"
+                alt="${escapeHTML(color.name)}"
+                style="width:100%;height:100%;object-fit:contain;"
+            >
+        `;
+
+        thumbnail.addEventListener("click", function () {
+            const colorSelect = document.getElementById("detail-color");
+
+            if (colorSelect) {
+                colorSelect.value = index;
+            }
+
+            const mainImage = document.getElementById("detail-image");
+
+            if (mainImage) {
+                mainImage.src = "images/" + color.image;
+            }
+
+            renderThumbnails(product, index);
+        });
+
+        thumbnailArea.appendChild(thumbnail);
+    });
+}
+
+
 function renderProductDetail() {
     const detailName = document.getElementById("detail-name");
 
@@ -1843,7 +1917,7 @@ function renderProductDetail() {
     renderProductReviews(product);
 
     if (colorSelect && mainImage) {
-        colorSelect.onchange = function() {
+        colorSelect.onchange = function () {
             const selectedIndex = Number(this.value);
 
             mainImage.src = "images/" + product.colors[selectedIndex].image;
@@ -1855,7 +1929,7 @@ function renderProductDetail() {
     const addButton = document.getElementById("detail-add-button");
 
     if (addButton) {
-        addButton.onclick = function() {
+        addButton.onclick = function () {
             const selectedIndex = colorSelect
                 ? Number(colorSelect.value)
                 : 0;
@@ -1871,6 +1945,7 @@ function renderProductDetail() {
     setupImageZoom();
 }
 
+
 function selectDetailImage(imageName, element) {
     const mainImage = document.getElementById("detail-image");
 
@@ -1880,13 +1955,14 @@ function selectDetailImage(imageName, element) {
 
     document.querySelectorAll(".product-thumbnail").forEach(image => {
         image.classList.remove("active");
+        image.setAttribute("aria-pressed", "false");
     });
 
     if (element) {
         element.classList.add("active");
+        element.setAttribute("aria-pressed", "true");
     }
 }
-
 
 // ==========================================
 // GÖRSEL BÜYÜTME
