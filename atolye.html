@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN Atölye: Kamp ve seyahat ekipmanlarınızın bakımı, temizliği ve uzun ömürlü kullanımı için rehberler.">
+
+    <title>GEZGİN Atölye | Bakım ve Kullanım Rehberi</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* GENEL */
+        .workshop-page {
+            background: #f7f5ef;
+            color: #263b32;
+        }
+
+        .workshop-container {
+            width: 90%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        /* HERO */
+        .workshop-hero {
+            min-height: 430px;
+            background:
+                linear-gradient(90deg, rgba(13, 38, 29, 0.88), rgba(13, 38, 29, 0.25)),
+                url("images/gezgin-atolye.png") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .workshop-hero-content {
+            max-width: 650px;
+            padding: 75px 0;
+        }
+
+        .workshop-label {
+            color: #d8bd85;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .workshop-hero h1 {
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.15;
+            margin-bottom: 22px;
+            font-weight: 800;
+        }
+
+        .workshop-hero p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #f0eee7;
+            max-width: 570px;
+        }
+
+        .workshop-hero-button {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 14px 27px;
+            background: #c5a66b;
+            color: #183d32;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .workshop-hero-button:hover {
+            background: #e0c995;
+            transform: translateY(-3px);
+        }
+
+        /* GİRİŞ */
+        .workshop-intro {
+            text-align: center;
+            padding: 75px 20px 55px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .workshop-intro span {
+            color: #a3864e;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .workshop-intro h2 {
+            color: #183d32;
+            font-size: 34px;
+            margin: 15px 0;
+        }
+
+        .workshop-intro p {
+            color: #68756d;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        /* KATEGORİ KARTLARI */
+        .workshop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding-bottom: 85px;
+        }
+
+        .workshop-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(24, 61, 50, 0.07);
+            transition: 0.3s;
+        }
+
+        .workshop-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(24, 61, 50, 0.13);
+        }
+
+      .workshop-card-image {
+    height: 260px;
+    padding: 15px;
+    background: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.workshop-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: 0.5s;
+}
+
+.workshop-card:hover .workshop-card-image img {
+    transform: scale(1.04);
+}
+
+        .workshop-card:hover .workshop-card-image img {
+            transform: scale(1.06);
+        }
+
+        .workshop-card-content {
+            padding: 25px;
+        }
+
+        .workshop-card-content span {
+            color: #a3864e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .workshop-card-content h3 {
+            color: #183d32;
+            font-size: 21px;
+            margin: 12px 0;
+        }
+
+        .workshop-card-content p {
+            color: #68756d;
+            font-size: 14px;
+            line-height: 1.8;
+            min-height: 75px;
+        }
+
+        .workshop-tips {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #eeeae0;
+        }
+
+        .workshop-tips h4 {
+            color: #183d32;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .workshop-tips ul {
+            padding-left: 18px;
+            color: #68756d;
+        }
+
+        .workshop-tips li {
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 6px;
+        }
+
+        /* BİLGİ ALANI */
+        .workshop-info {
+            background: #183d32;
+            color: white;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .workshop-info h2 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .workshop-info p {
+            max-width: 750px;
+            margin: auto;
+            color: #e0e8e2;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        /* YEDEK PARÇA YÖNLENDİRME */
+        .workshop-parts {
+            margin: 75px auto;
+            background: #eee9dc;
+            border-radius: 14px;
+            padding: 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .workshop-parts-text {
+            max-width: 700px;
+        }
+
+        .workshop-parts h2 {
+            color: #183d32;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .workshop-parts p {
+            color: #68756d;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .workshop-parts a {
+            display: inline-block;
+            flex-shrink: 0;
+            background: #183d32;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .workshop-parts a:hover {
+            background: #c5a66b;
+            color: #183d32;
+        }
+
+        /* DUYARLILIK */
+        @media(max-width: 900px) {
+            .workshop-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .workshop-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workshop-hero {
+                min-height: 380px;
+            }
+
+            .workshop-hero-content {
+                padding: 55px 0;
+            }
+
+            .workshop-intro h2 {
+                font-size: 27px;
+            }
+
+            .workshop-parts {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px;
+            }
+
+            .workshop-parts h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body class="workshop-page">
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="sss.html">SSS</a>
+        <a href="iletisim.html">İletişim</a>
+    </nav>
+
+</header>
+
+<main>
+
+    <section class="workshop-hero">
+        <div class="workshop-container">
+            <div class="workshop-hero-content">
+                <div class="workshop-label">GEZGİN ATÖLYE</div>
+
+                <h1>Ekipmanlarınıza İyi Bakın, Yolculuğunuz Uzun Sürsün.</h1>
+
+                <p>
+                    Her yolculukta yanınızda olan ekipmanlarınızın ömrünü
+                    uzatmak için bakım, temizlik ve doğru kullanım
+                    önerilerini GEZGİN Atölye'de keşfedin.
+                </p>
+
+                <a href="#bakim-rehberleri" class="workshop-hero-button">
+                    Bakım Rehberlerini Keşfet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="workshop-intro">
+        <span>GEZGİN BAKIM REHBERİ</span>
+        <h2>Her Ekipmanın Bir Bakım Hikâyesi Var</h2>
+
+        <p>
+            Kamp ve seyahat ekipmanlarının doğru şekilde temizlenmesi,
+            kurutulması ve saklanması uzun süreli kullanım açısından
+            önemlidir. GEZGİN Atölye, ürünlerinizi daha bilinçli
+            kullanabilmeniz için pratik bakım önerileri sunar.
+        </p>
+    </section>
+
+    <section class="workshop-container" id="bakim-rehberleri">
+
+        <div class="workshop-grid">
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img src="images/cadiryesil.png" alt="Kamp çadırı bakım rehberi">
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>KAMP EKİPMANLARI</span>
+                    <h3>Çadır Bakımı</h3>
+
+                    <p>
+                        Çadırınızın kumaşını, dikişlerini ve taşıyıcı
+                        parçalarını korumak için doğru bakım yöntemlerini
+                        uygulayın.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Çadırı kuruduktan sonra toplayın.</li>
+                            <li>Kirleri yumuşak bir fırçayla temizleyin.</li>
+                            <li>Gerekirse nemli bez ve hafif sabun kullanın.</li>
+                            <li>Çamaşır makinesinde yıkamayın.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img src="images/tulumyesil.png" alt="Uyku tulumu bakım rehberi">
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>KONFOR VE KONAKLAMA</span>
+                    <h3>Uyku Tulumu Bakımı</h3>
+
+                    <p>
+                        Uyku tulumunuzun dolgu yapısını ve kumaşını
+                        koruyarak konforlu kullanım süresini destekleyin.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Yıkama öncesinde ürün etiketini kontrol edin.</li>
+                            <li>Uygun değilse makinede yıkamayın.</li>
+                            <li>Yumuşatıcı ve ağartıcı kullanmayın.</li>
+                            <li>Tamamen kuruduktan sonra saklayın.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img
+    src="images/sandalyeyesil.png"
+    alt="GEZGİN kamp sandalyesi bakım rehberi"
+    onerror="this.onerror=null; this.src='images/sandalyelacivert.png';"
+>
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>KAMP EKİPMANLARI</span>
+                    <h3>Kamp Sandalyesi Bakımı</h3>
+
+                    <p>
+                        Sandalyenizin kumaşını, bağlantı noktalarını
+                        ve metal aksamını düzenli olarak kontrol edin.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Yüzeydeki tozları düzenli temizleyin.</li>
+                            <li>Kumaşı nemli bezle silin.</li>
+                            <li>Bağlantı noktalarını kontrol edin.</li>
+                            <li>Katlamadan önce tamamen kurutun.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img src="images/sirtcantasiyesil.png" alt="Sırt çantası bakım rehberi">
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>SEYAHAT EKİPMANLARI</span>
+                    <h3>Sırt ve Seyahat Çantası Bakımı</h3>
+
+                    <p>
+                        Çantanızın kumaşını, fermuarlarını ve taşıma
+                        askılarını korumak için düzenli bakım yapın.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Temizlik öncesinde cepleri boşaltın.</li>
+                            <li>Fermuarları kapatıp kumaşı temizleyin.</li>
+                            <li>Yumuşak fırça ve nemli bez kullanın.</li>
+                            <li>Gölge bir alanda kurumaya bırakın.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img src="images/termossiyah.png" alt="Termos bakım rehberi">
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>GÜNLÜK KULLANIM</span>
+                    <h3>Termos Bakımı</h3>
+
+                    <p>
+                        Termosunuzun iç yüzeyini, kapağını ve conta
+                        parçalarını temiz tutarak hijyenik kullanım sağlayın.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Ilık su ve bulaşık deterjanıyla temizleyin.</li>
+                            <li>İç kısım için uygun şişe fırçası kullanın.</li>
+                            <li>Aşındırıcı tel ve ağartıcı kullanmayın.</li>
+                            <li>Kapağı açık şekilde tamamen kurutun.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="workshop-card">
+                <div class="workshop-card-image">
+                    <img src="images/kamplambasi.png" alt="Kamp lambası bakım rehberi">
+                </div>
+
+                <div class="workshop-card-content">
+                    <span>AYDINLATMA EKİPMANLARI</span>
+                    <h3>Kamp Lambası Bakımı</h3>
+
+                    <p>
+                        Kamp lambanızın gövdesini ve bağlantı noktalarını
+                        koruyarak güvenli kullanımını destekleyin.
+                    </p>
+
+                    <div class="workshop-tips">
+                        <h4>Bakım Önerileri</h4>
+                        <ul>
+                            <li>Temizlik öncesinde cihazı kapatın.</li>
+                            <li>Şarj kablosunu cihazdan ayırın.</li>
+                            <li>Hafif nemli veya kuru bez kullanın.</li>
+                            <li>Cihazı suya batırmayın.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="workshop-info">
+        <div class="workshop-container">
+            <h2>Uzun Ömürlü Kullanım, Doğru Bakımla Başlar</h2>
+
+            <p>
+                Ekipmanlarınızı üretici bakım talimatlarına uygun şekilde
+                temizlemek ve saklamak, performanslarını korumaya yardımcı
+                olur. Her ürünün malzemesi ve bakım ihtiyacı farklı
+                olabileceğinden öncelikle ürün etiketindeki talimatları
+                dikkate almanızı öneririz.
+            </p>
+        </div>
+    </section>
+
+    <section class="workshop-container">
+        <div class="workshop-parts">
+            <div class="workshop-parts-text">
+                <h2>Eksik Parçalarınız İçin GEZGİN Yanınızda</h2>
+
+                <p>
+                    Kamp ve seyahat ekipmanlarınızın kullanımını
+                    sürdürebilmeniz için ürünlere uygun yedek parçaları
+                    keşfedin. İhtiyacınız olan parçayı GEZGİN Yedek
+                    Parçalar bölümünde inceleyebilirsiniz.
+                </p>
+            </div>
+
+            <a href="yedek-parcalar.html">
+                Yedek Parçaları İncele →
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+
+        <div class="footer-column">
+            <h3>GEZGİN</h3>
+            <p>
+                Her yolculuk bir hikâyedir,
+                biz o hikâyeye eşlik ediyoruz.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Kurumsal</h3>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="magazalar.html">Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Alışveriş</h3>
+            <a href="urunler.html">Ürünlerimiz</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="sepet.html">Sepetim</a>
+            <a href="sss.html">Sıkça Sorulan Sorular</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 GEZGİN. Tüm hakları saklıdır.
+    </div>
+</footer>
+
+</body>
+</html>

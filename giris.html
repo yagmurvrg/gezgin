@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN üye girişi sayfası.">
+    <title>Üye Girişi | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .login-page {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #f7f5ef;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 460px;
+            background: #fff;
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(16, 44, 36, 0.09);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-heading h1 {
+            color: #183d32;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .login-heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #183d32;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .login-form input:focus {
+            border-color: #183d32;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0 25px;
+            font-size: 13px;
+        }
+
+        .remember-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #666;
+        }
+
+        .remember-option input {
+            width: auto;
+            accent-color: #183d32;
+        }
+
+        .forgot-password {
+            color: #183d32;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: #183d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-button:hover {
+            background: #102c24;
+        }
+
+        .register-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .register-text a {
+            color: #183d32;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .login-back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .login-back:hover {
+            color: #183d32;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 30px 22px;
+            }
+
+            .login-options {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="giris.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-heading">
+            <h1>Hoş Geldin!</h1>
+            <p>GEZGİN ailesine giriş yap ve keşfetmeye devam et.</p>
+        </div>
+
+        <form class="login-form" id="login-form">
+
+            <div class="form-group">
+                <label for="email">E-posta Adresi</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="ornek@email.com"
+                    autocomplete="email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Şifrenizi girin"
+                    autocomplete="current-password"
+                    required>
+            </div>
+
+            <div class="login-options">
+
+                <label class="remember-option">
+                    <input type="checkbox" id="remember">
+                    Beni hatırla
+                </label>
+
+                <a href="#" class="forgot-password" id="forgot-password">
+                    Şifremi unuttum?
+                </a>
+
+            </div>
+
+            <button type="submit" class="login-button">
+                Giriş Yap
+            </button>
+
+        </form>
+
+        <div class="register-text">
+            Henüz hesabın yok mu?
+            <a href="kayit.html">Hemen Kayıt Ol</a>
+        </div>
+
+        <a href="index.html" class="login-back">
+            ← Ana Sayfaya Dön
+        </a>
+
+    </div>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Her yolculuk bir hikâyedir.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Hızlı Bağlantılar</h3>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="favoriler.html">♡ Favorilerim</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Yardım</h3>
+            <a href="iletisim.html">İletişim</a>
+            <a href="sss.html">Sıkça Sorulan Sorular</a>
+            <a href="sepet.html">Sepetim</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GEZGİN Outdoor. Her yolculuk bir hikâyedir.</p>
+    </div>
+
+</footer>
+
+<script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        alert("Üyelik sistemi henüz kurulmadı. Giriş işlemini sonraki aşamada aktif edeceğiz.");
+    });
+
+    document.getElementById("forgot-password").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        alert("Şifre yenileme özelliğini üyelik sisteminin sonraki aşamasında ekleyeceğiz.");
+    });
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN favori ürünleriniz.">
+    <title>Favorilerim | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .favorites-page {
+            min-height: 70vh;
+            padding: 60px 20px;
+            background: #f7f5ef;
+        }
+
+        .favorites-container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .favorites-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .favorites-heading h1 {
+            color: #183d32;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .favorites-heading p {
+            color: #777;
+        }
+
+        .favorites-box {
+            background: white;
+            border-radius: 14px;
+            padding: 45px 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(16,44,36,0.06);
+        }
+
+        .favorites-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .favorites-box h2 {
+            color: #183d32;
+            margin-bottom: 12px;
+        }
+
+        .favorites-box p {
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .favorites-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #183d32;
+            color: white;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .favorites-button:hover {
+            background: #102c24;
+        }
+
+        #favorites-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        #favorites-list .product-card {
+            position: relative;
+        }
+
+        #favorites-list .product-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: contain;
+        }
+
+        #favorites-list .product-info {
+            padding: 18px;
+        }
+
+        #favorites-list .product-info h3 {
+            margin: 10px 0;
+        }
+
+        #favorites-list .product-button {
+            width: 100%;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .favorites-heading h1 {
+                font-size: 26px;
+            }
+
+            .favorites-box {
+                padding: 35px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="GEZGİN Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html">Ürünler</a>
+                <a href="magazalar.html">📍 Mağaza Bul</a>
+                <a href="atolye.html">Atölye</a>
+                <a href="yedek-parcalar.html">Yedek Parçalar</a>
+                <a href="hakkimizda.html">Hakkımızda</a>
+                <a href="yorumlar.html">Yorumlar</a>
+                <a href="iletisim.html">İletişim</a>
+                <a href="sss.html">SSS</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="hesabim.html">Hesabım</a>
+                <a href="favoriler.html">♡ Favorilerim</a>
+                <a href="sepet.html">🛒 Sepetim</a>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="favorites-page">
+
+        <div class="favorites-container">
+
+            <div class="favorites-heading">
+                <h1>♡ Favorilerim</h1>
+                <p>Beğendiğin ürünleri burada bir araya getir.</p>
+            </div>
+
+            <div id="favorites-list"></div>
+
+            <div class="favorites-box" id="empty-favorites">
+                <div class="favorites-icon">♡</div>
+
+                <h2>Henüz favori ürünün yok.</h2>
+
+                <p>
+                    Beğendiğin ürünleri favorilerine ekleyerek
+                    daha sonra kolayca ulaşabilirsin.
+                </p>
+
+                <a href="urunler.html" class="favorites-button">
+                    Ürünleri Keşfet
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <h2>GEZGİN</h2>
+                <p>Keşfetmenin Keyfi, Yolculuğun Konforu.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Hızlı Bağlantılar</h3>
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html">Ürünler</a>
+                <a href="magazalar.html">📍 Mağaza Bul</a>
+                <a href="atolye.html">Atölye</a>
+                <a href="yedek-parcalar.html">Yedek Parçalar</a>
+                <a href="hakkimizda.html">Hakkımızda</a>
+                <a href="yorumlar.html">Yorumlar</a>
+                <a href="iletisim.html">İletişim</a>
+                <a href="sss.html">SSS</a>
+                <a href="favoriler.html">♡ Favorilerim</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>İletişim</h3>
+                <p>E-posta: info@gezgin.com</p>
+                <p>GEZGİN Outdoor</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 GEZGİN Outdoor. Her yolculuk bir hikâyedir.</p>
+            <p>Eğitim amaçlı e-ticaret projesidir.</p>
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
