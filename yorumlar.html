@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN seyahat ve outdoor ürünleri kullanıcı değerlendirmeleri.">
+    <title>Müşteri Yorumları | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --review-green: #183d32;
+            --review-dark: #102c24;
+            --review-cream: #f7f5ef;
+            --review-gold: #c5a66b;
+            --review-border: #e9e6de;
+        }
+
+        body {
+            background: #fff;
+        }
+
+        .reviews-hero {
+            min-height: 390px;
+            padding: 85px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #102c24, #254b3e);
+            color: white;
+        }
+
+        .reviews-hero > span,
+        .section-heading > span {
+            color: var(--review-gold);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .reviews-hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(36px, 5vw, 57px);
+            line-height: 1.2;
+            margin: 20px 0;
+        }
+
+        .reviews-hero p {
+            max-width: 620px;
+            color: rgba(255,255,255,.78);
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .reviews-hero .primary-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: var(--review-gold);
+            color: var(--review-dark);
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 800;
+            transition: .25s;
+        }
+
+        .reviews-hero .primary-button:hover {
+            background: #ddc18a;
+            transform: translateY(-2px);
+        }
+
+        .reviews-section {
+            padding: 85px 7%;
+            background: #fff;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+            color: var(--review-green);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(27px, 4vw, 38px);
+            margin: 14px 0;
+        }
+
+        .section-heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .review-summary {
+            max-width: 1050px;
+            margin: 0 auto 55px;
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr 1fr;
+            align-items: center;
+            gap: 35px;
+            background: var(--review-cream);
+            border: 1px solid var(--review-border);
+            border-radius: 8px;
+        }
+
+        .summary-score {
+            text-align: center;
+            border-right: 1px solid #ded9cd;
+            padding-right: 20px;
+        }
+
+        .summary-score strong {
+            display: block;
+            color: var(--review-green);
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .summary-stars {
+            color: var(--review-gold);
+            font-size: 23px;
+            letter-spacing: 3px;
+            margin: 8px 0;
+        }
+
+        .summary-score span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .rating-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .rating-row {
+            display: grid;
+            grid-template-columns: 45px 1fr 35px;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .rating-track {
+            height: 7px;
+            background: #e5e0d5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: var(--review-gold);
+            border-radius: 20px;
+        }
+
+        .summary-note {
+            padding: 20px;
+            background: #fff;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .summary-note .note-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .summary-note strong {
+            display: block;
+            color: var(--review-green);
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .summary-note p {
+            color: #888;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .review-toolbar {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .review-toolbar h3 {
+            color: var(--review-green);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+        }
+
+        .review-filters {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .review-search,
+        .review-filter {
+            min-height: 42px;
+            padding: 10px 13px;
+            border: 1px solid var(--review-border);
+            border-radius: 4px;
+            background: #fff;
+            color: #555;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .review-search {
+            width: 210px;
+        }
+
+        .review-search:focus,
+        .review-filter:focus {
+            border-color: var(--review-gold);
+        }
+
+        .reviews-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .review-card {
+            padding: 26px;
+            background: #fff;
+            border: 1px solid var(--review-border);
+            border-radius: 7px;
+            box-shadow: 0 5px 20px rgba(16,44,36,.035);
+            display: flex;
+            flex-direction: column;
+            min-height: 285px;
+            transition: .3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(16,44,36,.09);
+            border-color: #d9c9a7;
+        }
+
+        .review-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .review-stars {
+            color: var(--review-gold);
+            font-size: 17px;
+            letter-spacing: 2px;
+        }
+
+        .review-card h3 {
+            color: var(--review-green);
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .review-card > p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.9;
+            flex: 1;
+        }
+
+        .review-product {
+            margin-top: 17px;
+            padding-top: 13px;
+            border-top: 1px solid #f0eee8;
+            color: #8b744b;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 19px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--review-green);
+            color: white;
+            border-radius: 50%;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .review-author strong {
+            display: block;
+            color: #333;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .review-author span {
+            display: block;
+            color: #999;
+            font-size: 10px;
+        }
+
+        .no-review-results {
+            display: none;
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 35px;
+            background: var(--review-cream);
+            color: #777;
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        .review-disclaimer {
+            max-width: 1100px;
+            margin: 45px auto 0;
+            padding: 15px 20px;
+            background: var(--review-cream);
+            border-left: 3px solid var(--review-gold);
+            border-radius: 4px;
+            color: #777;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .about-slogan {
+            padding: 75px 20px;
+            background: var(--review-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .about-slogan h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .about-slogan p {
+            color: rgba(255,255,255,.7);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .about-slogan a {
+            display: inline-block;
+            padding: 13px 25px;
+            background: var(--review-gold);
+            color: var(--review-dark);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 3px;
+            transition: .25s;
+        }
+
+        .about-slogan a:hover {
+            background: #ddc18a;
+        }
+
+        @media (max-width: 1000px) {
+            .reviews-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .review-summary {
+                grid-template-columns: 1fr 1.4fr;
+            }
+
+            .summary-note {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .reviews-hero {
+                min-height: 340px;
+                padding: 65px 6%;
+            }
+
+            .reviews-section {
+                padding: 60px 5%;
+            }
+
+            .review-summary {
+                grid-template-columns: 1fr;
+                padding: 25px 18px;
+                gap: 22px;
+            }
+
+            .summary-score {
+                border-right: none;
+                border-bottom: 1px solid #ded9cd;
+                padding: 0 0 20px;
+            }
+
+            .summary-note {
+                grid-column: auto;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .review-toolbar {
+                align-items: stretch;
+            }
+
+            .review-filters {
+                width: 100%;
+            }
+
+            .review-search,
+            .review-filter {
+                width: 100%;
+            }
+
+            .review-card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html" class="active">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="giris.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim
+            <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main>
+
+    <section class="reviews-hero">
+
+        <span>GEZGİN DENEYİMİ</span>
+
+        <h1>Yolculuklardan<br>Gelen Yorumlar.</h1>
+
+        <p>
+            Her yolculuk bir deneyim, her keşif yeni bir hikâyedir.
+            GEZGİN ürünleri için hazırlanan değerlendirmeleri keşfedin.
+        </p>
+
+        <a href="urunler.html" class="primary-button">
+            Ürünleri İncele
+        </a>
+
+    </section>
+
+    <section class="reviews-section">
+
+        <div class="section-heading">
+            <span>KULLANICI DENEYİMİ</span>
+
+            <h2>GEZGİN Değerlendirmeleri</h2>
+
+            <p>
+                Seyahat ve outdoor ürünlerimize yönelik değerlendirmeler.
+            </p>
+        </div>
+
+        <div class="review-summary">
+
+            <div class="summary-score">
+                <strong>4,8</strong>
+                <div class="summary-stars">★★★★★</div>
+                <span>Genel değerlendirme tasarımı</span>
+            </div>
+
+            <div class="rating-breakdown">
+
+                <div class="rating-row">
+                    <span>5 yıldız</span>
+                    <div class="rating-track">
+                        <div class="rating-fill" style="width:85%;"></div>
+                    </div>
+                    <span>%85</span>
+                </div>
+
+                <div class="rating-row">
+                    <span>4 yıldız</span>
+                    <div class="rating-track">
+                        <div class="rating-fill" style="width:15%;"></div>
+                    </div>
+                    <span>%15</span>
+                </div>
+
+                <div class="rating-row">
+                    <span>3 yıldız</span>
+                    <div class="rating-track">
+                        <div class="rating-fill" style="width:0%;"></div>
+                    </div>
+                    <span>%0</span>
+                </div>
+
+                <div class="rating-row">
+                    <span>2 yıldız</span>
+                    <div class="rating-track">
+                        <div class="rating-fill" style="width:0%;"></div>
+                    </div>
+                    <span>%0</span>
+                </div>
+
+                <div class="rating-row">
+                    <span>1 yıldız</span>
+                    <div class="rating-track">
+                        <div class="rating-fill" style="width:0%;"></div>
+                    </div>
+                    <span>%0</span>
+                </div>
+
+            </div>
+
+            <div class="summary-note">
+                <div class="note-icon">✦</div>
+                <strong>GEZGİN Kalite Anlayışı</strong>
+                <p>
+                    Konfor, işlevsellik ve keşif odaklı
+                    bir ürün deneyimi sunmayı hedefliyoruz.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="review-toolbar">
+
+            <h3>Müşteri Değerlendirmeleri</h3>
+
+            <div class="review-filters">
+
+                <input
+                    type="search"
+                    id="review-search"
+                    class="review-search"
+                    placeholder="Yorum veya ürün ara..."
+                    aria-label="Yorumlarda ara"
+                >
+
+                <select id="review-filter" class="review-filter" aria-label="Yıldız puanına göre filtrele">
+                    <option value="all">Tüm Değerlendirmeler</option>
+                    <option value="5">5 Yıldız</option>
+                    <option value="4">4 Yıldız</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="reviews-grid" id="reviews-grid">
+
+            <div class="review-card" data-rating="5">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★★</div>
+                </div>
+
+                <h3>Konforlu Bir Kamp Deneyimi</h3>
+
+                <p>
+                    Kamp çadırının geniş tasarımı ve kullanışlı
+                    görünümü oldukça hoşuma gitti. Doğa gezileri
+                    için güzel bir seçenek gibi görünüyor.
+                </p>
+
+                <div class="review-product">StormGuard Kamp Çadırı</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">A</div>
+                    <div>
+                        <strong>Ahmet Yılmaz</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="review-card" data-rating="5">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★★</div>
+                </div>
+
+                <h3>Seyahatlerde Büyük Kolaylık</h3>
+
+                <p>
+                    Boyun yastığının ergonomik tasarımı uzun
+                    yolculuklarda rahatlık sağlamayı hedefliyor.
+                    Seyahat çantasında taşımak da kolay görünüyor.
+                </p>
+
+                <div class="review-product">Comfort Neck Boyun Yastığı</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">M</div>
+                    <div>
+                        <strong>Melis Kaya</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="review-card" data-rating="5">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★★</div>
+                </div>
+
+                <h3>Pratik ve Kullanışlı</h3>
+
+                <p>
+                    Uyku tulumunun taşınabilir tasarımı kamp
+                    hazırlıklarını kolaylaştıracak şekilde düşünülmüş.
+                    Tasarımı oldukça başarılı.
+                </p>
+
+                <div class="review-product">ThermoSleep Uyku Tulumu</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">E</div>
+                    <div>
+                        <strong>Emre Demir</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="review-card" data-rating="4">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★☆</div>
+                </div>
+
+                <h3>Şık Bir Tasarım</h3>
+
+                <p>
+                    Kamp sandalyesinin katlanabilir tasarımı
+                    outdoor etkinlikleri için oldukça kullanışlı
+                    bir fikir sunuyor.
+                </p>
+
+                <div class="review-product">Adventure Kamp Sandalyesi</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">Z</div>
+                    <div>
+                        <strong>Zeynep Arslan</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="review-card" data-rating="5">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★★</div>
+                </div>
+
+                <h3>Valiz Düzeninde Yeni Bir Deneyim</h3>
+
+                <p>
+                    Valiz düzenleyici setinin farklı eşyaları
+                    gruplandırmaya yardımcı olan tasarımı
+                    seyahat hazırlıklarını kolaylaştırabilir.
+                </p>
+
+                <div class="review-product">Premium Valiz Düzenleyici</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">S</div>
+                    <div>
+                        <strong>Selin Türk</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="review-card" data-rating="5">
+
+                <div class="review-card-top">
+                    <div class="review-stars">★★★★★</div>
+                </div>
+
+                <h3>Modern ve Zarif</h3>
+
+                <p>
+                    Termosun sade ve modern görünümü günlük
+                    kullanım için oldukça hoş. Renk seçenekleri
+                    de güzel düşünülmüş.
+                </p>
+
+                <div class="review-product">ThermoPro Premium Termos</div>
+
+                <div class="review-author">
+                    <div class="author-avatar">B</div>
+                    <div>
+                        <strong>Burak Mutlu</strong>
+                        <span>GEZGİN Kullanıcısı</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="no-review-results" id="no-review-results">
+            Aradığınız kriterlere uygun bir değerlendirme bulunamadı.
+        </div>
+
+        <div class="review-disclaimer">
+            Bu değerlendirme içerikleri GEZGİN eğitim projesi kapsamında hazırlanmıştır.
+        </div>
+
+    </section>
+
+    <section class="about-slogan">
+
+        <h2>
+            Yeni Bir Yolculuğa<br>
+            Hazır mısınız?
+        </h2>
+
+        <p>
+            İhtiyaçlarınıza uygun seyahat ve outdoor ürünlerini keşfedin.
+        </p>
+
+        <a href="urunler.html">
+            Koleksiyonu Keşfet →
+        </a>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Keşfetmenin Keyfi, Yolculuğun Konforu.</p>
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Hızlı Bağlantılar</h3>
+
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="iletisim.html">İletişim</a>
+            <a href="favoriler.html">♡ Favorilerim</a>
+            <a href="sss.html">SSS</a>
+
+        </div>
+
+        <div class="footer-contact">
+            <h3>İletişim</h3>
+            <p>E-posta: info@gezgin.com</p>
+            <p>GEZGİN Outdoor</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>© 2026 GEZGİN. Tüm hakları saklıdır.</p>
+
+        <p>
+            Eğitim amaçlı e-ticaret projesidir.
+            Gerçek satış ve ödeme yapılmamaktadır.
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const searchInput = document.getElementById("review-search");
+        const filterSelect = document.getElementById("review-filter");
+        const reviewCards = document.querySelectorAll(".review-card");
+        const noResults = document.getElementById("no-review-results");
+
+        function filterReviews() {
+
+            const searchValue = searchInput.value.toLocaleLowerCase("tr").trim();
+            const selectedRating = filterSelect.value;
+
+            let visibleCount = 0;
+
+            reviewCards.forEach(function (card) {
+
+                const cardText = card.textContent.toLocaleLowerCase("tr");
+                const cardRating = card.dataset.rating;
+
+                const matchesSearch = cardText.includes(searchValue);
+                const matchesRating = selectedRating === "all" || cardRating === selectedRating;
+
+                if (matchesSearch && matchesRating) {
+                    card.style.display = "flex";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        searchInput.addEventListener("input", filterReviews);
+        filterSelect.addEventListener("change", filterReviews);
+
+    });
+</script>
+
+</body>
+</html>

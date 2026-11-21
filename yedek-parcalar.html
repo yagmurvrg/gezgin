@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="GEZGİN yedek parçalar. Kamp ve seyahat ekipmanlarınız için uyumlu yedek parçaları keşfedin.">
+
+    <title>Yedek Parçalar | GEZGİN</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* GENEL */
+        .parts-page {
+            background: #f7f5ef;
+            color: #263b32;
+        }
+
+        .parts-container {
+            width: 90%;
+            max-width: 1250px;
+            margin: auto;
+        }
+/* HERO */
+.parts-hero {
+    min-height: 430px;
+    background:
+        linear-gradient(90deg, rgba(13,38,29,.82), rgba(13,38,29,.20)),
+        url("images/yedek-parcalar.png") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+        .parts-hero-content {
+            max-width: 680px;
+            padding: 70px 0;
+        }
+
+        .parts-label {
+            color: #d8bd85;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .parts-hero h1 {
+            font-size: clamp(36px, 5vw, 55px);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .parts-hero p {
+            color: #eeeae0;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .parts-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            padding: 65px 15px 35px;
+        }
+
+        .parts-intro span {
+            color: #a3864e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .parts-intro h2 {
+            color: #183d32;
+            font-size: 33px;
+            margin: 14px 0;
+        }
+
+        .parts-intro p {
+            color: #68756d;
+            line-height: 1.8;
+        }
+
+        /* AVANTAJLAR */
+        .parts-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 25px auto 55px;
+        }
+
+        .parts-benefit {
+            background: white;
+            border-radius: 10px;
+            padding: 23px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(24,61,50,.05);
+        }
+
+        .parts-benefit .icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .parts-benefit h3 {
+            color: #183d32;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .parts-benefit p {
+            color: #778078;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ARAMA VE FİLTRELEME */
+        .parts-controls {
+            background: white;
+            border-radius: 10px;
+            padding: 22px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(24,61,50,.05);
+        }
+
+        .parts-controls input,
+        .parts-controls select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dddcd3;
+            border-radius: 6px;
+            background: #fff;
+            color: #263b32;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .parts-controls input:focus,
+        .parts-controls select:focus {
+            border-color: #183d32;
+        }
+
+        .parts-result-count {
+            color: #758078;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* YEDEK PARÇA KARTLARI */
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding-bottom: 70px;
+        }
+
+        .part-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 7px 24px rgba(24,61,50,.07);
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .part-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 32px rgba(24,61,50,.13);
+        }
+
+        .part-visual {
+            height: 240px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 15px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .part-product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform .4s ease;
+        }
+
+        .part-card:hover .part-product-image {
+            transform: scale(1.05);
+        }
+
+        .part-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #183d32;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .part-content {
+            padding: 23px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .part-category {
+            color: #a3864e;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .part-content h3 {
+            color: #183d32;
+            font-size: 19px;
+            margin: 10px 0;
+        }
+
+        .part-description {
+            color: #778078;
+            font-size: 13px;
+            line-height: 1.7;
+            min-height: 65px;
+        }
+
+        .part-compatibility {
+            background: #f5f4ed;
+            border-left: 3px solid #c5a66b;
+            padding: 11px 13px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #59675e;
+            line-height: 1.6;
+        }
+
+        .part-price {
+            color: #183d32;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 8px 0 16px;
+        }
+
+        .part-stock {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .part-add-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 5px;
+            background: #183d32;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            margin-top: auto;
+        }
+
+        .part-add-button:hover:not(:disabled) {
+            background: #c5a66b;
+            color: #183d32;
+        }
+
+        .part-add-button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .parts-empty {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border-radius: 10px;
+            color: #68756d;
+            margin-bottom: 60px;
+        }
+
+        /* ATÖLYE YÖNLENDİRME */
+        .parts-workshop {
+            background: #183d32;
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 0 auto 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .parts-workshop h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .parts-workshop p {
+            color: #e0e8e2;
+            line-height: 1.8;
+            font-size: 14px;
+            max-width: 650px;
+        }
+
+        .parts-workshop a {
+            flex-shrink: 0;
+            display: inline-block;
+            padding: 14px 23px;
+            background: #c5a66b;
+            color: #183d32;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 5px;
+        }
+
+        .parts-workshop a:hover {
+            background: #e0c995;
+        }
+
+        .parts-disclaimer {
+            font-size: 12px;
+            color: #858b83;
+            text-align: center;
+            margin: -40px auto 45px;
+            line-height: 1.7;
+        }
+
+        /* MOBİL UYUMLULUK */
+        @media(max-width: 900px) {
+            .parts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .parts-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .parts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .parts-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .parts-workshop {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 28px;
+            }
+
+            .parts-intro h2 {
+                font-size: 27px;
+            }
+
+            .part-visual {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body class="parts-page">
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="sss.html">SSS</a>
+        <a href="iletisim.html">İletişim</a>
+    </nav>
+
+</header>
+
+<main>
+
+    <section class="parts-hero">
+        <div class="parts-container">
+            <div class="parts-hero-content">
+
+                <div class="parts-label">
+                    GEZGİN YEDEK PARÇALAR
+                </div>
+
+                <h1>Her Yolculukta İhtiyacınız Olan Destek Yanınızda.</h1>
+
+                <p>
+                    Kamp ve seyahat ekipmanlarınızın kullanımını
+                    sürdürebilmeniz için tasarlanan yedek parçaları
+                    keşfedin. Ekipmanlarınızı tamamlayın, yeni
+                    yolculuklara güvenle hazırlanın.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="parts-container">
+
+        <div class="parts-intro">
+
+            <span>GEZGİN EKİPMAN DESTEĞİ</span>
+
+            <h2>İhtiyacınız Olan Parçayı Keşfedin</h2>
+
+            <p>
+                Kamp ve seyahat ürünleriniz için seçilmiş yedek
+                parçaları inceleyebilir, ürününüzle uyumluluğunu
+                kontrol ederek alışveriş sepetinize ekleyebilirsiniz.
+            </p>
+
+        </div>
+
+        <div class="parts-benefits">
+
+            <div class="parts-benefit">
+                <div class="icon">🧩</div>
+                <h3>Ürün Uyumluluğu</h3>
+                <p>Parçaların hangi GEZGİN ekipmanları için tasarlandığını inceleyin.</p>
+            </div>
+
+            <div class="parts-benefit">
+                <div class="icon">🛠️</div>
+                <h3>Pratik Çözümler</h3>
+                <p>Ekipmanlarınızın bakım ve kullanım süreçlerini destekleyen parçalar.</p>
+            </div>
+
+            <div class="parts-benefit">
+                <div class="icon">🌿</div>
+                <h3>Uzun Süreli Kullanım</h3>
+                <p>Uygun yedek parçalarla ekipmanlarınızın kullanımını sürdürün.</p>
+            </div>
+
+        </div>
+
+        <div class="parts-controls">
+
+            <input
+                type="search"
+                id="part-search"
+                placeholder="Yedek parça ara..."
+                aria-label="Yedek parça ara"
+            >
+
+            <select id="part-category">
+                <option value="all">Tüm Kategoriler</option>
+                <option value="Çadır Parçaları">Çadır Parçaları</option>
+                <option value="Çanta Parçaları">Çanta Parçaları</option>
+                <option value="Sandalye Parçaları">Sandalye Parçaları</option>
+                <option value="Termos Parçaları">Termos Parçaları</option>
+            </select>
+
+            <select id="part-sort">
+                <option value="default">Varsayılan Sıralama</option>
+                <option value="low-high">Fiyat: Artan</option>
+                <option value="high-low">Fiyat: Azalan</option>
+                <option value="az">İsim: A-Z</option>
+            </select>
+
+        </div>
+
+        <div class="parts-result-count" id="part-result-count">
+            Yedek parçalar listeleniyor.
+        </div>
+
+        <div class="parts-grid" id="parts-list"></div>
+
+        <div class="parts-empty" id="parts-empty">
+            <h3>Aradığınız yedek parça bulunamadı.</h3>
+            <p>Farklı bir kelime veya kategori deneyebilirsiniz.</p>
+        </div>
+
+        <div class="parts-workshop">
+
+            <div>
+                <h2>Ekipmanlarınızın Bakımını İhmal Etmeyin</h2>
+
+                <p>
+                    Ürünlerinizin doğru temizlenmesi, saklanması ve
+                    kullanılması için GEZGİN Atölye bakım rehberlerini
+                    inceleyebilirsiniz.
+                </p>
+            </div>
+
+            <a href="atolye.html">Atölyeyi Keşfet →</a>
+
+        </div>
+
+        <p class="parts-disclaimer">
+            Bu sayfa eğitim projesi kapsamında hazırlanmış örnek bir
+            yedek parça kataloğudur. Ürün uyumluluğu ve fiyat bilgileri
+            temsili olarak sunulmuştur.
+        </p>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-column">
+            <h3>GEZGİN</h3>
+            <p>Her yolculuk bir hikâyedir, biz o hikâyeye eşlik ediyoruz.</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Kurumsal</h3>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="magazalar.html">Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Alışveriş</h3>
+            <a href="urunler.html">Ürünlerimiz</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="sepet.html">Sepetim</a>
+            <a href="sss.html">Sıkça Sorulan Sorular</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 GEZGİN. Tüm hakları saklıdır.
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+
+// ==========================================
+// GEZGİN YEDEK PARÇA VERİLERİ
+// ==========================================
+
+const spareParts = [
+
+    {
+        id: 101,
+        name: "GEZGİN Alüminyum Çadır Direği",
+        category: "Çadır Parçaları",
+        price: 590,
+        stock: 12,
+        description: "Kamp çadırlarının taşıyıcı yapısını desteklemek için tasarlanmış alüminyum direk.",
+        compatibility: "GEZGİN StormGuard Kamp Çadırı",
+        image: "images/yedekcadirDiregi.png"
+    },
+
+    {
+        id: 102,
+        name: "GEZGİN Çadır Kazık Seti",
+        category: "Çadır Parçaları",
+        price: 290,
+        stock: 20,
+        description: "Çadırın zemine sabitlenmesine yardımcı olan dayanıklı kazık seti.",
+        compatibility: "GEZGİN StormGuard Kamp Çadırı",
+        image: "images/yedekcadirKazigi.png"
+    },
+
+    {
+        id: 103,
+        name: "GEZGİN Çadır Bağlantı Aparatı",
+        category: "Çadır Parçaları",
+        price: 190,
+        stock: 15,
+        description: "Çadır direklerinin ve bağlantı noktalarının sabitlenmesini destekleyen bağlantı parçası.",
+        compatibility: "GEZGİN StormGuard Kamp Çadırı",
+        image: "images/yedekcadirBaglanti.png"
+    },
+
+    {
+        id: 104,
+        name: "GEZGİN Çadır Tamir Yaması",
+        category: "Çadır Parçaları",
+        price: 160,
+        stock: 25,
+        description: "Küçük yüzey hasarlarının onarımında kullanılmak üzere tasarlanmış tamir yaması.",
+        compatibility: "Polyester çadır kumaşları için uygun yüzeylerde",
+        image: "images/yedekcadirTamirYamasi.png"
+    },
+
+    {
+        id: 105,
+        name: "GEZGİN Sırt Çantası Tokası",
+        category: "Çanta Parçaları",
+        price: 120,
+        stock: 18,
+        description: "Çanta kayışlarının sabitlenmesi ve ayarlanması için yedek toka.",
+        compatibility: "GEZGİN AdventurePro Sırt Çantası",
+        image: "images/yedekSirtCantasiTokasi.png"
+    },
+
+    {
+        id: 106,
+        name: "GEZGİN Çanta Omuz Askısı",
+        category: "Çanta Parçaları",
+        price: 260,
+        stock: 10,
+        description: "Seyahat çantaları için ayarlanabilir yedek omuz askısı.",
+        compatibility: "GEZGİN Premium Seyahat Çantası",
+        image: "images/yedekCantaOmuzAskisi.png"
+    },
+
+    {
+        id: 107,
+        name: "GEZGİN Fermuar Başlığı",
+        category: "Çanta Parçaları",
+        price: 90,
+        stock: 30,
+        description: "Uygun ölçüdeki çanta fermuarları için yedek fermuar çekme aparatı.",
+        compatibility: "GEZGİN seyahat ve sırt çantaları",
+        image: "images/yedekFermuarBasligi.png"
+    },
+
+    {
+        id: 108,
+        name: "GEZGİN Kamp Sandalyesi Ayak Tapası",
+        category: "Sandalye Parçaları",
+        price: 140,
+        stock: 16,
+        description: "Sandalye ayaklarının zeminle temasını destekleyen yedek koruyucu parça.",
+        compatibility: "GEZGİN Adventure Kamp Sandalyesi",
+        image: "images/yedekSandalyeAyakTapasi.png"
+    },
+
+    {
+        id: 109,
+        name: "GEZGİN Sandalye Bağlantı Aparatı",
+        category: "Sandalye Parçaları",
+        price: 210,
+        stock: 10,
+        description: "Katlanabilir sandalye iskeletindeki uygun bağlantı noktaları için yedek aparat.",
+        compatibility: "GEZGİN Adventure Kamp Sandalyesi",
+        image: "images/yedekSandalyeBaglanti.png"
+    },
+
+    {
+        id: 110,
+        name: "GEZGİN Termos Yedek Kapağı",
+        category: "Termos Parçaları",
+        price: 220,
+        stock: 14,
+        description: "Termosun kapak bölümünü yenilemek için tasarlanmış yedek kapak.",
+        compatibility: "GEZGİN ThermoPro Premium Termos",
+        image: "images/yedekTermosKapagi.png"
+    },
+
+    {
+        id: 111,
+        name: "GEZGİN Termos Silikon Conta",
+        category: "Termos Parçaları",
+        price: 85,
+        stock: 25,
+        description: "Termos kapağının sızdırmazlık yapısını destekleyen silikon conta.",
+        compatibility: "GEZGİN ThermoPro Premium Termos",
+        image: "images/yedekTermosSilikonConta.png"
+    }
+
+];
+
+
+// ==========================================
+// YEDEK PARÇALARI ANA ÜRÜN SİSTEMİNE EKLE
+// ==========================================
+
+spareParts.forEach(part => {
+
+    if (!products.some(product => product.id === part.id)) {
+
+        products.push({
+
+            id: part.id,
+            name: part.name,
+            category: part.category,
+            price: part.price,
+            stock: part.stock,
+
+            description: part.description,
+
+            features: [
+                "Ürün türü: Yedek parça",
+                "Uyumlu ürün: " + part.compatibility
+            ],
+
+            warranty: "Eğitim projesi kapsamında temsili bilgi",
+
+            usageInstructions: [
+                "Parçayı satın almadan önce mevcut ürününüzle uyumluluğunu kontrol edin.",
+                "Kurulum ve değişim işlemlerinde ürün kullanım talimatlarını dikkate alın.",
+                "Emin olmadığınız montaj işlemleri için teknik destek alın."
+            ],
+
+            boxContents: [
+                "1 adet " + part.name
+            ],
+
+            colors: [
+                {
+                    name: "Standart",
+                    image: part.image
+                }
+            ],
+
+            reviews: []
+
+        });
+
+    }
+
+    if (stockData[part.id] === undefined) {
+        stockData[part.id] = part.stock;
+    }
+
+});
+
+saveStock();
+
+
+// ==========================================
+// YEDEK PARÇALARI ANA SAYFADA GÖSTER
+// ==========================================
+
+function renderSpareParts() {
+
+    const container = document.getElementById("parts-list");
+
+    if (!container) return;
+
+    const searchInput = document.getElementById("part-search");
+    const categoryInput = document.getElementById("part-category");
+    const sortInput = document.getElementById("part-sort");
+
+    const search = searchInput.value
+        .toLocaleLowerCase("tr-TR")
+        .trim();
+
+    const category = categoryInput.value;
+    const sort = sortInput.value;
+
+    let filtered = spareParts.filter(part => {
+
+        const text = (
+            part.name + " " +
+            part.category + " " +
+            part.description + " " +
+            part.compatibility
+        ).toLocaleLowerCase("tr-TR");
+
+        const matchesSearch = text.includes(search);
+
+        const matchesCategory =
+            category === "all" || part.category === category;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    if (sort === "low-high") {
+        filtered.sort((a, b) => a.price - b.price);
+    }
+
+    if (sort === "high-low") {
+        filtered.sort((a, b) => b.price - a.price);
+    }
+
+    if (sort === "az") {
+        filtered.sort((a, b) =>
+            a.name.localeCompare(b.name, "tr")
+        );
+    }
+
+    container.innerHTML = filtered.map(part => {
+
+        const stock = getStock(part.id);
+
+        return `
+            <article class="part-card">
+
+                <div class="part-visual">
+
+                    <span class="part-tag">GEZGİN YEDEK PARÇA</span>
+
+                    <img
+                        class="part-product-image"
+                        src="${part.image}"
+                        alt="${escapeHTML(part.name)}"
+                        loading="lazy"
+                        onerror="this.onerror=null; this.alt='Ürün görseli bulunamadı'; this.src='images/logo.png';"
+                    >
+
+                </div>
+
+                <div class="part-content">
+
+                    <span class="part-category">
+                        ${escapeHTML(part.category)}
+                    </span>
+
+                    <h3>${escapeHTML(part.name)}</h3>
+
+                    <p class="part-description">
+                        ${escapeHTML(part.description)}
+                    </p>
+
+                    <div class="part-compatibility">
+                        <strong>Uyumlu ürün:</strong><br>
+                        ${escapeHTML(part.compatibility)}
+                    </div>
+
+                    <div class="part-price">
+                        ${formatPrice(part.price)}
+                    </div>
+
+                    <div class="part-stock"
+                        style="color:${stock > 0 ? "#27834b" : "#c0392b"}">
+
+                        ${stock > 0
+                            ? "● Stokta: " + stock + " adet"
+                            : "● Stokta Yok"}
+
+                    </div>
+
+                    <button
+                        class="part-add-button"
+                        onclick="addToCart(${part.id})"
+                        ${stock <= 0 ? "disabled" : ""}
+                    >
+                        ${stock > 0 ? "🛒 Sepete Ekle" : "Stokta Yok"}
+                    </button>
+
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
+
+    document.getElementById("part-result-count").textContent =
+        filtered.length + " yedek parça listeleniyor.";
+
+    document.getElementById("parts-empty").style.display =
+        filtered.length === 0 ? "block" : "none";
+
+}
+
+
+// ==========================================
+// YEDEK PARÇA STOK GÖRÜNÜMÜNÜ YENİLE
+// ==========================================
+
+function updateSparePartStockDisplay() {
+    renderSpareParts();
+}
+
+
+// ==========================================
+// FİLTRELER
+// ==========================================
+
+document.getElementById("part-search").addEventListener(
+    "input",
+    renderSpareParts
+);
+
+document.getElementById("part-category").addEventListener(
+    "change",
+    renderSpareParts
+);
+
+document.getElementById("part-sort").addEventListener(
+    "change",
+    renderSpareParts
+);
+
+
+// ==========================================
+// SEPET SONRASI STOK GÖRÜNÜMÜ
+// ==========================================
+
+const originalUpdateStockDisplays = updateStockDisplays;
+
+updateStockDisplays = function() {
+
+    originalUpdateStockDisplays();
+
+    renderSpareParts();
+
+};
+
+
+// ==========================================
+// SAYFA AÇILDIĞINDA
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    renderSpareParts();
+
+});
+
+</script>
+
+</body>
+</html>

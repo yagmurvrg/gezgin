@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GEZGİN ürün detayları. Seyahat ve outdoor ürünlerini keşfedin.">
+    <title>Ürün Detayı | GEZGİN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="GEZGİN Logo">
+    </a>
+
+    <nav class="main-nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="magazalar.html">📍 Mağaza Bul</a>
+        <a href="atolye.html">Atölye</a>
+        <a href="yedek-parcalar.html">Yedek Parçalar</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="yorumlar.html">Yorumlar</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="sss.html">SSS</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="hesabim.html">Hesabım</a>
+        <a href="favoriler.html">♡ Favorilerim</a>
+        <a href="sepet.html" class="cart-link">
+            🛒 Sepetim <span id="cart-count">0</span>
+        </a>
+    </div>
+
+</header>
+
+<main class="detail-page">
+
+    <div class="detail-breadcrumb">
+        <a href="index.html">Ana Sayfa</a>
+        <span>/</span>
+        <a href="urunler.html">Ürünler</a>
+        <span>/</span>
+        <span>Ürün Detayı</span>
+    </div>
+
+    <section class="product-detail">
+
+        <div class="detail-gallery">
+
+            <div class="main-product-image" id="zoom-container">
+                <img id="detail-image" src="" alt="GEZGİN ürün görseli">
+            </div>
+
+            <div class="thumbnail-list" id="thumbnail-list"></div>
+
+            <p class="zoom-info">
+                🔍 Yakınlaştırmak için görselin üzerine gelin.
+            </p>
+
+        </div>
+
+        <div class="detail-info">
+
+            <span class="product-category" id="detail-category">
+                GEZGİN KOLEKSİYONU
+            </span>
+
+            <h1 id="detail-name">Ürün Adı</h1>
+
+            <div class="detail-rating">
+                <span id="detail-rating-stars">★★★★★</span>
+                <small id="detail-rating-text">
+                    Ürün değerlendirmeleri
+                </small>
+            </div>
+
+            <p class="detail-price" id="detail-price"></p>
+
+            <p class="detail-description" id="detail-description"></p>
+<div class="detail-color-area">
+    <label for="detail-color">Renk Seçeneği</label>
+    <select id="detail-color"></select>
+</div>
+
+<div class="detail-color-area" id="detail-size-area" style="display:none;">
+    <label for="detail-size">Beden Seçeneği</label>
+    <select id="detail-size"></select>
+</div>
+
+<div class="detail-actions">
+    <button id="detail-add-button" class="product-button">
+        🛒 Sepete Ekle
+    </button>
+</div>
+
+            <div class="detail-delivery">
+                <p>✓ Konfor odaklı ürün tasarımları</p>
+                <p>✓ Farklı renk seçenekleri</p>
+                <p>✓ Kullanışlı ve modern tasarım</p>
+                <p>✓ Eğitim amaçlı ürün kataloğu</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TEKNİK ÜRÜN BİLGİLERİ -->
+
+    <section class="product-information">
+
+        <div class="section-heading">
+            <span>ÜRÜNÜ YAKINDAN TANIYIN</span>
+            <h2>Teknik Özellikler</h2>
+            <p>Ürünün malzeme, ölçü, kapasite ve teknik detaylarını inceleyin.</p>
+        </div>
+
+        <div id="detail-features" class="features-table"></div>
+
+    </section>
+
+    <!-- GARANTİ VE KULLANIM BİLGİLERİ -->
+
+    <section class="product-extra-information">
+
+        <div class="section-heading">
+            <span>ÜRÜN HAKKINDA BİLMENİZ GEREKENLER</span>
+            <h2>Garanti ve Kullanım Bilgileri</h2>
+            <p>Ürünün kullanımına, korunmasına ve garanti kapsamına ilişkin bilgiler.</p>
+        </div>
+
+        <div id="detail-warranty" class="features-table"></div>
+
+    </section>
+
+    <!-- KURULUM VE BAKIM -->
+
+    <section class="product-extra-information">
+
+        <div class="section-heading">
+            <span>DOĞRU KULLANIM</span>
+            <h2>Kurulum ve Bakım Önerileri</h2>
+            <p>Ürünün kullanım ömrünü desteklemek için öneriler.</p>
+        </div>
+
+        <div id="detail-usage" class="features-table"></div>
+
+    </section>
+
+    <!-- KUTU İÇERİĞİ -->
+
+    <section class="product-extra-information">
+
+        <div class="section-heading">
+            <span>PAKET DETAYLARI</span>
+            <h2>Kutu İçeriği</h2>
+            <p>Ürünle birlikte sunulan parçalar ve aksesuarlar.</p>
+        </div>
+
+        <div id="detail-box-content" class="features-table"></div>
+
+        <p class="review-disclaimer">
+            Teknik özellikler ve garanti bilgileri eğitim projesi kapsamında
+            oluşturulmuş temsili ürün bilgileridir. Gerçek üretici garantisi
+            veya satış taahhüdü niteliği taşımaz.
+        </p>
+
+    </section>
+
+    <!-- KULLANICI YORUMLARI -->
+
+    <section class="product-reviews">
+
+        <div class="section-heading">
+            <span>KULLANICI DENEYİMLERİ</span>
+            <h2>Ürün Hakkındaki Yorumlar</h2>
+            <p>Bu ürünü değerlendiren kullanıcıların yorumları.</p>
+        </div>
+
+        <div id="detail-reviews" class="reviews-grid"></div>
+
+        <p class="review-disclaimer">
+            Önceden eklenmiş yorumlar eğitim projesi kapsamında
+            hazırlanmış temsili değerlendirmelerdir.
+        </p>
+
+    </section>
+
+    <!-- YENİ YORUM EKLEME ALANI -->
+
+    <section class="add-review-section">
+
+        <div class="section-heading">
+            <span>FİKRİNİZİ PAYLAŞIN</span>
+            <h2>Bu Ürünü Değerlendirin</h2>
+            <p>Ürün hakkındaki düşüncelerinizi ve puanınızı paylaşın.</p>
+        </div>
+
+        <form id="product-review-form" class="product-review-form">
+
+            <div class="review-form-group">
+
+                <label for="review-name">Adınız</label>
+
+                <input
+                    type="text"
+                    id="review-name"
+                    placeholder="Adınızı girin"
+                    maxlength="40"
+                    required
+                >
+
+            </div>
+
+            <div class="review-form-group">
+
+                <label>Puanınız</label>
+
+                <div class="star-rating" id="star-rating">
+
+                    <button type="button" data-rating="1" aria-label="1 yıldız">★</button>
+                    <button type="button" data-rating="2" aria-label="2 yıldız">★</button>
+                    <button type="button" data-rating="3" aria-label="3 yıldız">★</button>
+                    <button type="button" data-rating="4" aria-label="4 yıldız">★</button>
+                    <button type="button" data-rating="5" aria-label="5 yıldız">★</button>
+
+                </div>
+
+                <input type="hidden" id="review-rating" value="0">
+
+                <small id="rating-message">
+                    Puan vermek için yıldızlara tıklayın.
+                </small>
+
+            </div>
+
+            <div class="review-form-group">
+
+                <label for="review-comment">Yorumunuz</label>
+
+                <textarea
+                    id="review-comment"
+                    rows="5"
+                    placeholder="Ürün hakkındaki düşüncelerinizi yazın..."
+                    maxlength="500"
+                    required
+                ></textarea>
+
+            </div>
+
+            <button type="submit" class="product-button">
+                Yorumumu Gönder
+            </button>
+
+            <p id="review-form-message" aria-live="polite"></p>
+
+        </form>
+
+    </section>
+
+    <div class="detail-back-link">
+        <a href="urunler.html">← Tüm Ürünlere Geri Dön</a>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>GEZGİN</h2>
+            <p>Keşfetmenin Keyfi, Yolculuğun Konforu.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Hızlı Bağlantılar</h3>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="urunler.html">Ürünler</a>
+            <a href="magazalar.html">📍 Mağaza Bul</a>
+            <a href="atolye.html">Atölye</a>
+            <a href="yedek-parcalar.html">Yedek Parçalar</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="yorumlar.html">Yorumlar</a>
+            <a href="favoriler.html">Favorilerim</a>
+            <a href="sss.html">Sıkça Sorulan Sorular</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>İletişim</h3>
+            <p>E-posta: info@gezgin.com</p>
+            <p>GEZGİN Outdoor</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GEZGİN. Tüm hakları saklıdır.</p>
+        <p>Eğitim amaçlı e-ticaret projesidir. Gerçek satış yapılmamaktadır.</p>
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
