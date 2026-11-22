@@ -2457,3 +2457,19 @@ button:disabled {
         border-radius: 10px;
     }
 }
+/* GEZGİN MENÜ GÖRÜNÜRLÜK DÜZELTMESİ */
+.site-header .header-actions {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1002 !important;
+    grid-column: 3 !important;
+}
+
+.site-header .header-actions a {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #183d32 !important;
+}
