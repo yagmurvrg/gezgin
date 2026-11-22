@@ -2473,3 +2473,32 @@ button:disabled {
     opacity: 1 !important;
     color: #183d32 !important;
 }
+/* YEDEK PARÇALAR SAYFASI MENÜ DÜZELTMESİ */
+body.parts-page .site-header {
+    display: grid !important;
+    grid-template-columns: 145px minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    width: 100% !important;
+    overflow: visible !important;
+}
+
+body.parts-page .site-header .main-nav {
+    grid-column: 2 !important;
+    min-width: 0 !important;
+}
+
+body.parts-page .site-header .header-actions {
+    grid-column: 3 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1002 !important;
+    white-space: nowrap !important;
+}
+
+body.parts-page .site-header .header-actions a {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
